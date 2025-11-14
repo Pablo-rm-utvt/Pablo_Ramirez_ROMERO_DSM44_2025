@@ -44,7 +44,7 @@ export const useLoginUser = (): UseLoginUser => {
 
     const { signIn, changeFavoriteImage, changeUsername, changeEmail } = useContext(AuthContext);
 
-    const apiURl: string = "http://192.168.86.243:3000/api/dsm44/usuarios/login";
+    const apiURl: string = "http://10.45.20.13:3000/api/dsm44/usuarios/login";
 
     const handleInputChange = (fieldName: keyof LoginData, value: string) => {
         dispatch({ type: "handleInputChange", payload: { fieldName, value } });

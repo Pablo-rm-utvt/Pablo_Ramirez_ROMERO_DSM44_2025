@@ -14,7 +14,7 @@ interface Props {
     url: string;
 }
 
-// 👇 Tipamos la navegación
+
 type NavigationProp = StackNavigationProp<RootStackParams, "HomePokemon">;
 
 export const PokemonCard = ({ id, name, picture, url }: Props) => {

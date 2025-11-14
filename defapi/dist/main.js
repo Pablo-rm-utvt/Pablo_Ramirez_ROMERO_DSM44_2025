@@ -10,7 +10,7 @@ const getLocalIp = () => Object.values((0, os_1.networkInterfaces)())
 async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
     app.enableCors({
-        origin: ['http://localhost:8081', 'http://localhost:3000', 'exp://192.168.100.132:3000'],
+        origin: ['http://localhost:8081', 'http://localhost:3000', 'exp://10.45.20.13:3000'],
         methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
         credentials: true,
     });

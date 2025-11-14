@@ -4,7 +4,7 @@ import { BtnTouch } from '../../components/BtnTouch';
 import useFormEmpleado from '../../hooks/useFormEmpleado';
 import { useEmpleadoApi } from '../../hooks/useEmpleadoApi';
 import { useImagePicker } from '../../hooks/useImagePicker';
-import { empleadosApi, updateEmpleado as apiUpdateEmpleado } from '../../api/empleadosApi';
+import { updateEmpleado as apiUpdateEmpleado } from '../../api/empleadosApi';
 
 interface Props {
   navigation: any;

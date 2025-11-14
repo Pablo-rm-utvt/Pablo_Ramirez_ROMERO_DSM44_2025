@@ -25,7 +25,8 @@ export class SensorController {
     @Query('limit') limit: number = 100,
     @Req() req: express.Request
   ) {
-    const baseUrl = `${req.protocol}://${req.host}${req.baseUrl}/api/dsm44/sensor/paginate`;
+    const baseUrl = `${req.protocol}://${req.host}${req.baseUrl}/api/sensor/paginate`;
+
 
     return this.sensorService.paginate(page, limit, baseUrl);
   }

@@ -126,7 +126,7 @@ export const useEmpleadoApi = (): UseEmpleadoApi => {
       console.log('[useEmpleadoApi] Intentando eliminar empleado (fetch primero):', data.id_empleado);
       // Primero intentar con fetch directo (más confiable en algunos entornos)
       try {
-        const url = `http://192.168.86.243:3000/tarea/empleado/${data.id_empleado}`;
+        const url = `http://10.45.20.13:3000/tarea/empleado/${data.id_empleado}`;
         const resp = await fetch(url, { method: 'DELETE', headers: { 'Content-Type': 'application/json' } });
         console.log('[useEmpleadoApi] fetch DELETE status:', resp.status, resp.statusText);
         if (!resp.ok) {
@@ -170,7 +170,7 @@ export const useEmpleadoApi = (): UseEmpleadoApi => {
       // Intentar fetch primero
       try {
         console.log('[useEmpleadoApi] removeById: intentando fetch DELETE id=', id);
-        const url = `http://192.168.86.243:3000/tarea/empleado/${id}`;
+        const url = `http://10.45.20.13:3000/tarea/empleado/${id}`;
         const resp = await fetch(url, { method: 'DELETE', headers: { 'Content-Type': 'application/json' } });
         console.log('[useEmpleadoApi] removeById: fetch status', resp.status, resp.statusText);
         if (!resp.ok) {

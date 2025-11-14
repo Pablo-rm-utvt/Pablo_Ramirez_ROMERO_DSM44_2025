@@ -3,7 +3,7 @@ import axios from 'axios';
 // Ajusta la URL base según donde corra tu API
 
 export const empleadosApi = axios.create({
-	baseURL: 'http://192.168.86.243:3000',
+	baseURL: 'http://10.45.20.13:3000',
 	headers: {
 		'Content-Type': 'application/json',
 		'Accept': 'application/json'

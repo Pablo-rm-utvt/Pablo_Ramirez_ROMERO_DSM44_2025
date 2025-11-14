@@ -63,7 +63,7 @@ let SensorController = class SensorController {
         return this.sensorService.data();
     }
     paginate(page = 1, limit = 100, req) {
-        const baseUrl = `${req.protocol}://${req.host}${req.baseUrl}/api/dsm44/sensor/paginate`;
+        const baseUrl = `${req.protocol}://${req.host}${req.baseUrl}/api/sensor/paginate`;
         return this.sensorService.paginate(page, limit, baseUrl);
     }
     findAll() {

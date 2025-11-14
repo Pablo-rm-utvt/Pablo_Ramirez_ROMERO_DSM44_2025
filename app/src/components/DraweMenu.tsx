@@ -94,6 +94,20 @@ export const DrawerMenu = ({ navigation }: DrawerContentComponentProps) => {
                     >
                         <Text style={styles.menuButtonText}>Clínica</Text>
                     </TouchableOpacity>
+
+                    <TouchableOpacity
+                        style={styles.menuButton}
+                        onPress={() => navigation.navigate('SensorData')}
+                    >
+                        <Text style={styles.menuButtonText}>Datos del sensor</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                        style={styles.menuButton}
+                        onPress={() => navigation.navigate('SensorScreen')}
+                    >
+                        <Text style={styles.menuButtonText}>Sensor Paginated</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
 
