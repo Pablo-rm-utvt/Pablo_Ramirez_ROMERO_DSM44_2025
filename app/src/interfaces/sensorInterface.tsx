@@ -9,6 +9,8 @@ export interface NewSensorList {
     id: string;
     estado: string;
     temperatura_c: number;
+    distacia_cm: number;
+    fecha: Date;
 }
 
 export interface Datum {

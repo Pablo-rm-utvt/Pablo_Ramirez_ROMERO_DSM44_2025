@@ -6,26 +6,28 @@ interface Props {
     id: string;
     estado: string;
     temperatura_c: number;
+    distacia_cm: number;
+    fecha: any | string;
 }
 
 
 
-export const SensorCard = ({ id, estado, temperatura_c }: Props) => {
+export const SensorCard = ({ id, estado, temperatura_c, distacia_cm, fecha }: Props) => {
 
-    const widthDimensions = Dimensions.get("window").width;
 
     return (
 
-        <TouchableOpacity style={{
-            ...style.cardContainer,
-            width: widthDimensions
-        }}>
+        <TouchableOpacity style={
+            style.cardContainer
+        }>
 
             <View
             >
                 <Text style={style.name}>{estado}</Text>
                 <Text style={style.name}>ID: {id}</Text>
                 <Text style={style.temperature}>{temperatura_c}°C</Text>
+                <Text>Distancia en centimetros: {distacia_cm}</Text>
+                <Text>Fecha: {fecha} </Text>
 
 
             </View>
@@ -40,10 +42,13 @@ export const SensorCard = ({ id, estado, temperatura_c }: Props) => {
 
 const style = StyleSheet.create({
     cardContainer: {
+        textAlign: "center",
+        justifyContent: "center",
+        alignItems: "center",
         marginHorizontal: 10,
         borderColor: "blue",
         borderWidth: 2,
-        width: 80,
+        width: 160,
         height: 200,
         marginBottom: 25,
         borderRadius: 20,
@@ -54,6 +59,8 @@ const style = StyleSheet.create({
         color: "black",
         fontSize: 18,
         marginHorizontal: 10,
+        alignSelf: "center",
+        fontWeight: "bold"
     },
     temperature: {
         color: "black",

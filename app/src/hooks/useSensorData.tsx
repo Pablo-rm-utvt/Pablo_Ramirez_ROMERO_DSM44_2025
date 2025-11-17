@@ -26,7 +26,7 @@ export const useSensorData = (): UseSensorData => {
     const [yesterday, setYesterday] = useState<TypeData>({} as TypeData);
     const [beforeYesterday, setBeforeYesterday] = useState<TypeData>({} as TypeData);
 
-    const url: string = "http://10.45.20.13:3000/api/sensor/data";
+    const url: string = "http://192.168.100.132:3000/api/sensor/data";
 
     const loadData = async () => {
         setIsLoading(true);

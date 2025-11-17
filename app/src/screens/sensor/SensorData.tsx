@@ -10,7 +10,7 @@ export const SensorData = () => {
 
     const chartConfig = {
         backgroundColor: "black",
-        backgroundGradientFrom: "blue",
+        backgroundGradientFrom: "pink",
         backgroundGradientTo: "#132f4bff",
         decimalPlaces: 2,
         color: (opacity = 1) => `rgba(255,255,255,${opacity})`,
@@ -33,7 +33,7 @@ export const SensorData = () => {
             refreshControl={
                 <RefreshControl
                     onRefresh={loadData}
-                    refreshing={!isLoading}
+                    refreshing={isLoading}
                 />
             }
         >

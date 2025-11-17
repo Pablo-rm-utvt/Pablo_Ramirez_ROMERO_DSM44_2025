@@ -2,7 +2,7 @@ const axios = require("axios");
 
 // === CONFIGURACIÓN ===
 const API_URL = "http://localhost:3000/api/sensor";
-const TOTAL_RECORDS = 200000;
+const TOTAL_RECORDS = 2000;
 
 // === ENUM ===
 const EstadoSensor = {
@@ -55,7 +55,7 @@ async function sendSensorData() {
     console.log(`Día ${i + 1}: Enviados ${batch.length} registros (total: ${count})`);
   }
 
-  console.log("Envío completo de 100,000 registros");
+  console.log("Envío completo registros");
 }
 
 // === FUNCIÓN PARA ENVIAR LOTES ===
