@@ -16,11 +16,11 @@ export const SensorScreen = () => {
                 keyExtractor={(sensor) => `${sensor.id}`}
                 // Header
                 ListHeaderComponent={(
-                    <View>
+                    <View style={{ alignSelf: 'center', alignContent: 'center' }}>
                         <Text
-                            style={{ fontSize: 60, marginHorizontal: 10 }}
+                            style={{ textAlign: 'center', fontSize: 40, fontWeight: 'bold' }}
                         >
-                            Sensor
+                            Sensor Paginate
                         </Text>
                     </View>
                 )}
@@ -39,7 +39,7 @@ export const SensorScreen = () => {
                         <ActivityIndicator
                             style={{ height: 120 }}
                             size={60}
-                            color="pink"
+                            color="blue"
                         />
                     ) : null
                 }
@@ -50,6 +50,7 @@ export const SensorScreen = () => {
 
 const style = StyleSheet.create({
     root: {
+        backgroundColor: '#ffffffff',
         flex: 1,
         justifyContent: "center",
         alignItems: "center"

@@ -17,8 +17,8 @@ export const useSensorPaginated = (): UseSensorPaginated => {
     const loadSensor = async () => {
         setIsLoading(true);
         const response = await sensorApi.get<Welcome>(nextPageUrl.current || "");
-        nextPageUrl.current = response?.data?.links?.next || null;
-        mapSensorList(response?.data?.data || []);
+        nextPageUrl.current = response.data.links.next || null;
+        mapSensorList(response.data.data || []);
     }
 
     const mapSensorList = (sensorList: Datum[]) => {
@@ -30,8 +30,15 @@ export const useSensorPaginated = (): UseSensorPaginated => {
             fecha: sensor.fecha,
         }));
 
-        setSimpleSensorList((prevList) => [...prevList, ...newSensorList]);
-        setIsLoading(false);
+        // setSimpleSensorList((prevList) => [...prevList, ...newSensorList]);
+        // setIsLoading(false);
+        setSimpleSensorList((prevList) => {
+            const merged = [...prevList, ...newSensorList];
+            const unique = merged.filter(
+                (item, index, self) => index === self.findIndex(t => t.id === item.id)
+            );
+            return unique;
+        });
     }
 
     useEffect(() => {
