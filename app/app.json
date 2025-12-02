@@ -1,14 +1,14 @@
 {
   "expo": {
-    "name": "app",
-    "slug": "app",
+    "name": "Pablitos App",
+    "slug": "Pablitoscorp",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "icon": "./assets/logo.png",
+    "userInterfaceStyle": "dark",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/splash-icon.png",
+      "image": "./assets/fondo.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -21,7 +21,14 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "permissions": [
+        "android.permission.RECORD_AUDIO",
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.CAMERA"
+      ],
+      "package": "com.pablitos_utvt.Pablitoscorp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -32,7 +39,44 @@
         {
           "photosPermission": "La aplicación App necesita acceder a tu librería"
         }
+      ],
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "La aplicación funciona sabiendo tu ubicación gps."
+        }
+      ],
+      [
+        "expo-camera",
+        {
+          "cameraPermission": " acceder a tu camara "
+        }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "11aa0688-529d-43ed-8843-0fd12c7046c7"
+      }
+    }
+  },
+  "build": {
+    "production": {
+      "android": {
+        "image": "latest",
+        "buildType": "app-bundle"
+      },
+      "ios": {
+        "image": "latest",
+        "buildType": "release"
+      }
+    },
+    "preview": {
+      "android": {
+        "buildType": "apk"
+      },
+      "ios": {
+        "simulator": true
+      }
+    }
   }
 }

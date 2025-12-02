@@ -15,7 +15,7 @@ export const PacienteDetail = ({ route, navigation }: Props) => {
 
     const handleDelete = async (id: string | number) => {
         try {
-            const baseUrl = 'http://192.168.100.5:3000/api';
+            const baseUrl = 'http://192.168.100.12:3000/api';
             const response = await fetch(`${baseUrl}/clinica/${id}`, {
                 method: 'DELETE',
                 headers: {

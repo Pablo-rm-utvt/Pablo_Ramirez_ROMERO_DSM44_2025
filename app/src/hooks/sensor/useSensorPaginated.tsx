@@ -12,7 +12,7 @@ export const useSensorPaginated = (): UseSensorPaginated => {
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [simpleSensorList, setSimpleSensorList] = useState<NewSensorList[]>([]);
-    const nextPageUrl = useRef<string | null>("http://192.168.100.5:3000/api/sensor/paginate/");
+    const nextPageUrl = useRef<string | null>("http://192.168.100.12:3000/api/sensor/paginate/");
 
     const loadSensor = async () => {
         setIsLoading(true);

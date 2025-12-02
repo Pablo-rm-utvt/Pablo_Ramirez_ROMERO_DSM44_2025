@@ -65,10 +65,7 @@ export const DrawerMenu = ({ navigation }: DrawerContentComponentProps) => {
                         style={styles.menuButton}
                         onPress={() => navigation.navigate('PokemonNavigator')}
                     >
-                        <Image
-                            source={require("../../assets/pokfon.png")}
-                            style={{ width: 230, height: 48, top: 1, borderRadius: 20, position: 'absolute' }}
-                        />
+
                         <Text style={styles.menuButtonText}>Pokedex</Text>
                     </TouchableOpacity>
 
@@ -76,10 +73,7 @@ export const DrawerMenu = ({ navigation }: DrawerContentComponentProps) => {
                         style={styles.menuButton}
                         onPress={() => navigation.navigate('CharactersNavigator')}
                     >
-                        <Image
-                            source={require("../../assets/rickfon.png")}
-                            style={{ width: 230, height: 48, top: 1, borderRadius: 20, position: 'absolute' }}
-                        />
+
                         <Text style={styles.menuButtonTextR}>Rick API</Text>
 
                     </TouchableOpacity>
@@ -88,10 +82,7 @@ export const DrawerMenu = ({ navigation }: DrawerContentComponentProps) => {
                         style={styles.menuButton}
                         onPress={() => navigation.navigate('ExampleNavigator')}
                     >
-                        <Image
-                            source={require("../../assets/fondmy.png")}
-                            style={{ width: 230, height: 48, top: 1, borderRadius: 20, position: 'absolute' }}
-                        />
+
                         <Text style={styles.menuButtonText}>Ejemplo</Text>
                     </TouchableOpacity>
 

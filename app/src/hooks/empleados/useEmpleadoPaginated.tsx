@@ -12,7 +12,7 @@ export const useEmpleadoPaginated = (): UseEmpleadoPaginated => {
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [simpleEmpleadosList, setSimpleEmpleadosList] = useState<Datum[]>([]);
-    const nextPageUrl = useRef<string | null>("http://192.168.100.5:3000/api/empleados");
+    const nextPageUrl = useRef<string | null>("http://192.168.100.12:3000/api/empleados");
 
     const loadEmpleados = async () => {
         setIsLoading(true);

@@ -30,7 +30,7 @@ export const useTypeColorStatus = (_id: string | number): UseTypeColorStatus => 
     const loadType = async () => {
 
         const response = await sensorApi.get<Datum>(
-            `http://192.168.100.5:3000/api/sensor/${_id}`
+            `http://192.168.100.12:3000/api/sensor/${_id}`
         );
 
         getColorType(response.data.estado);

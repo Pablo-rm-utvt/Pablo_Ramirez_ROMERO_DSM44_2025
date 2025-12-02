@@ -10,7 +10,7 @@ import {
     UnidadesProducidas,
 } from "../../interfaces/empleadosInterface";
 
-const BASE_URL = "http://192.168.100.5:3000/api/empleados";
+const BASE_URL = "http://192.168.100.12:3000/api/empleados";
 
 export const useReporteAsistencia = () => {
     const [data, setData] = useState<ReporteAsistencia | null>(null);
