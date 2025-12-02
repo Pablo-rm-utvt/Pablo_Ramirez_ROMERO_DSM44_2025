@@ -1,25 +1,27 @@
 import { useWindowDimensions } from "react-native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { PokemonNavigator } from "./PokemonNavigator";
-import { EmpleadoNavigator } from "./EmpleadoNavigator";
 import { DrawerMenu } from "../components/DraweMenu";
 import { ImagePickerScreen } from "../screens/ImagePickerScreen";
-import { ExampleNavigator } from "./ExampleNavigator";
 import { CharactersNavigator } from "./CharactersNavigator";
 import { ClinicaNavigator } from "./ClinicaNavigator";
+import { EmpleadoNavigator } from "./EmpleadoNavigator";
 import { SensorScreen } from "../screens/sensor/SensorScreen";
 import { SensorData } from "../screens/sensor/SensorData";
+import { QrScannerScreen } from "../screens/QrScannerScreen";
+import { LocationScreen } from "../screens/LocationScreen";
 
 export type RootDrawerNavigator = {
   SensorScreen: undefined;
   SensorData: undefined;
   PokemonNavigator: undefined;
-  EmpleadoNavigator: undefined;
   ClinicaNavigator: undefined;
+  EmpleadoNavigator: undefined;
   ImagePickerScreen: undefined;
   ExampleNavigator: undefined;
   CharactersNavigator: undefined;
-
+  LocationScreen: undefined;
+  QrScannerScreen: undefined;
 
 };
 
@@ -42,14 +44,14 @@ const Navigator = () => {
       drawerContent={(props) => <DrawerMenu {...props} />}
     >
       <Drawer.Screen
-        name="EmpleadoNavigator"
-        component={EmpleadoNavigator}
+        name="QrScannerScreen"
+        component={QrScannerScreen}
         options={{
-          title: 'Empleados'
+          title: 'QR Scanner'
         }}
       />
 
-      <Drawer.Screen name="ExampleNavigator" component={ExampleNavigator} />
+      <Drawer.Screen name="LocationScreen" component={LocationScreen} />
       <Drawer.Screen name="SensorData" component={SensorData} />
       <Drawer.Screen name="PokemonNavigator" component={PokemonNavigator} />
       <Drawer.Screen name="ImagePickerScreen" component={ImagePickerScreen} />
@@ -61,6 +63,11 @@ const Navigator = () => {
         options={{
           title: 'Clínica'
         }}
+      />
+      <Drawer.Screen
+        name="EmpleadoNavigator"
+        component={EmpleadoNavigator}
+
       />
     </Drawer.Navigator>
   );

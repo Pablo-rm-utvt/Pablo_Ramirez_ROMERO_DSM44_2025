@@ -6,7 +6,7 @@ import { Clinica } from './entities/clinica.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Clinica])
+    TypeOrmModule.forFeature([Clinica], "conexion-postgres-form")
   ],
   controllers: [ClinicaController],
   providers: [ClinicaService],

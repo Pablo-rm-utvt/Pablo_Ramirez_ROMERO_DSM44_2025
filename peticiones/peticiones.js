@@ -1,13 +1,19 @@
 const axios = require("axios");
 
 // === CONFIGURACIÓN ===
-const API_URL = "http://localhost:3000/api/sensor";
-const TOTAL_RECORDS = 2000;
+const API_URL = "http://localhost:3000/api/examen/paciente";
+const TOTAL_RECORDS = 500;
 
 // === ENUM ===
-const EstadoSensor = {
-  activo: "Activo",
-  inactivo: "Inactivo",
+const TipoSAngre = {
+    A_POSITIVO : "A+",
+    A_NEGATIVO : "A-",
+    B_POSITIVO : "B+",
+    B_NEGATIVO : "B-",
+    AB_POSITIVO : "AB+",
+    AB_NEGATIVO : "AB-",
+    O_POSITIVO : "O+",
+    O_NEGATIVO : "O-"
 };
 
 // === FUNCIONES AUXILIARES ===

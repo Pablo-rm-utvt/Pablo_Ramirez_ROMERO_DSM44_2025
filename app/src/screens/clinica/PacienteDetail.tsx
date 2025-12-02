@@ -2,20 +2,20 @@ import React from 'react';
 import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
 import { PacienteActions } from '../../components/PacienteActions';
 import { StackScreenProps } from '@react-navigation/stack';
-import { RootStackParamList } from '../../navigator/types';
+import { RootStackParamList } from '../../interfaces/clinicaInterfaces';
 
 type Props = StackScreenProps<RootStackParamList, 'PacienteDetail'>;
 
 export const PacienteDetail = ({ route, navigation }: Props) => {
     const { paciente } = route.params;
 
-    const handleEdit = (id: string | number) => {
+    const handleEdit = (id: undefined | number) => {
         navigation.navigate('FormPaciente', { pacienteId: id });
     };
 
     const handleDelete = async (id: string | number) => {
         try {
-            const baseUrl = 'http://192.168.100.132:3000/api';
+            const baseUrl = 'http://192.168.100.5:3000/api';
             const response = await fetch(`${baseUrl}/clinica/${id}`, {
                 method: 'DELETE',
                 headers: {
@@ -175,7 +175,7 @@ export const PacienteDetail = ({ route, navigation }: Props) => {
             <View style={styles.actionsContainer}>
                 <PacienteActions
                     id={paciente.id}
-                    onEdit={handleEdit}
+                    onEdit={handleEdit.bind(this, paciente.id)}
                     onDelete={handleDelete}
                 />
             </View>

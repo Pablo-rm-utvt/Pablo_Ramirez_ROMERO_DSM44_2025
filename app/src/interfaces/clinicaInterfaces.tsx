@@ -36,3 +36,10 @@ export interface Clinica {
 }
 
 export type ClinicaResponse = Clinica;
+
+
+export type RootStackParamList = {
+    HomeClinica: undefined;
+    FormPaciente: { pacienteId?: number };
+    PacienteDetail: { paciente: Clinica };
+};

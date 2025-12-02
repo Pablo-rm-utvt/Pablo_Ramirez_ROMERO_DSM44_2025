@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, StyleSheet, ScrollView, TouchableOpacity, Alert, Image } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
-import { useClinicaApi } from '../../hooks/useClinicaApi';
+import { useClinicaApi } from '../../hooks/clinica/useClinicaApi';
 import { useImagePicker } from '../../hooks/useImagePicker';
 import { Clinica } from '../../interfaces/clinicaInterfaces';
 

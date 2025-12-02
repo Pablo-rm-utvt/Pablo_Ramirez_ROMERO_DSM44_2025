@@ -20,7 +20,7 @@ exports.ExamplesModule = ExamplesModule = __decorate([
         imports: [
             typeorm_1.TypeOrmModule.forFeature([
                 example_entity_1.Example
-            ])
+            ], "conexion-postgres-form")
         ],
         controllers: [examples_controller_1.ExamplesController],
         providers: [examples_service_1.ExamplesService],

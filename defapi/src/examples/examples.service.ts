@@ -10,7 +10,7 @@ import { Repository } from 'typeorm';
 export class ExamplesService {
 
   constructor(
-    @InjectRepository(Example)
+    @InjectRepository(Example, "conexion-postgres-form")
     private ExampleRepository: Repository<Example>
   ) { }
 

@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { HomeClinica } from '../screens/clinica/HomeClinica';
 import { FormPaciente } from '../screens/clinica/FormPaciente';
 import { PacienteDetail } from '../screens/clinica/PacienteDetail';
-import { RootStackParamList } from './types';
+import { RootStackParamList } from '../interfaces/clinicaInterfaces';
 
 const Stack = createStackNavigator<RootStackParamList>();
 

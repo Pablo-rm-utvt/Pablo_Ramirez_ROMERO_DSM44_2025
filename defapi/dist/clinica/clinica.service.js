@@ -80,7 +80,7 @@ let ClinicaService = class ClinicaService {
 exports.ClinicaService = ClinicaService;
 exports.ClinicaService = ClinicaService = __decorate([
     (0, common_1.Injectable)(),
-    __param(0, (0, typeorm_1.InjectRepository)(clinica_entity_1.Clinica)),
+    __param(0, (0, typeorm_1.InjectRepository)(clinica_entity_1.Clinica, "conexion-postgres-form")),
     __metadata("design:paramtypes", [typeorm_2.Repository])
 ], ClinicaService);
 //# sourceMappingURL=clinica.service.js.map

@@ -97,7 +97,7 @@ let ExamplesService = class ExamplesService {
 exports.ExamplesService = ExamplesService;
 exports.ExamplesService = ExamplesService = __decorate([
     (0, common_1.Injectable)(),
-    __param(0, (0, typeorm_1.InjectRepository)(example_entity_1.Example)),
+    __param(0, (0, typeorm_1.InjectRepository)(example_entity_1.Example, "conexion-postgres-form")),
     __metadata("design:paramtypes", [typeorm_2.Repository])
 ], ExamplesService);
 //# sourceMappingURL=examples.service.js.map

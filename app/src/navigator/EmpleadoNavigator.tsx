@@ -1,23 +1,37 @@
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
-import EmpleadosList from '../screens/EmpleadosList';
-import FormEmpleado from '../screens/empleado/FormEmpleado';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { EmpleadoListScreen } from '../screens/empleados/EmpleadoList';
+import { EmpleadoDetailScreen } from '../screens/empleados/EmpleadoDetail';
+import { Datum } from '../interfaces/empleadosInterface';
 
 export type EmpleadoStackParams = {
-    EmpleadosList: undefined;
-    EmpleadoDetail: { id: number } | undefined;
-    EmpleadoForm: { empleado?: any } | undefined;
+  EmpleadoListScreen: undefined;
+  EmpleadoDetail: { empleado: Datum };
 };
+
+const Stack = createNativeStackNavigator<EmpleadoStackParams>();
 
 export const EmpleadoNavigator = () => {
-    const Stack = createStackNavigator<EmpleadoStackParams>();
-    return (
-        <Stack.Navigator initialRouteName="EmpleadosList">
-            <Stack.Screen name="EmpleadosList" component={EmpleadosList} options={{ title: 'Empleados' }} />
-            {/* EmpleadoDetail removed to navigate directly from list to form */}
-            <Stack.Screen name="EmpleadoForm" component={FormEmpleado} options={{ title: 'Crear / Editar' }} />
-        </Stack.Navigator>
-    );
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <Stack.Screen
+        name="EmpleadoListScreen"
+        component={EmpleadoListScreen}
+        options={{
+          title: 'Empleados',
+        }}
+      />
+      <Stack.Screen
+        name="EmpleadoDetail"
+        component={EmpleadoDetailScreen}
+        options={{
+          title: 'Detalle del Empleado',
+        }}
+      />
+    </Stack.Navigator>
+  );
 };
-
-export default EmpleadoNavigator;

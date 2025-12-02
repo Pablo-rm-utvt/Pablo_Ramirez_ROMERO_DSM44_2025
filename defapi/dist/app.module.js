@@ -13,12 +13,14 @@ const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
 const examples_module_1 = require("./examples/examples.module");
 const example_entity_1 = require("./examples/entities/example.entity");
-const empleado_module_1 = require("./empleado/empleado.module");
-const empleado_entity_1 = require("./empleado/entities/empleado.entity");
+const empleados_module_1 = require("./empleados/empleados.module");
 const clinica_module_1 = require("./clinica/clinica.module");
 const clinica_entity_1 = require("./clinica/entities/clinica.entity");
 const sensor_module_1 = require("./sensor/sensor.module");
 const mongoose_1 = require("@nestjs/mongoose");
+const empleado_entity_1 = require("./empleados/entities/empleado.entity");
+const registro_asistencia_entity_1 = require("./empleados/entities/registro-asistencia.entity");
+const registro_produccion_entity_1 = require("./empleados/entities/registro-produccion.entity");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -27,40 +29,43 @@ exports.AppModule = AppModule = __decorate([
         imports: [
             mongoose_1.MongooseModule.forRoot("mongodb://localhost:27017/DSM44"),
             typeorm_1.TypeOrmModule.forRoot({
+                name: "conexion-postgres-form",
                 type: "postgres",
                 host: "localhost",
                 port: 5432,
                 username: "postgres",
                 password: "1234",
-                database: "pollosanjuan",
+                database: "formularios",
                 entities: [example_entity_1.Example],
                 synchronize: true,
                 autoLoadEntities: true,
             }),
             typeorm_1.TypeOrmModule.forRoot({
+                name: "conexion-postgres",
                 type: "postgres",
                 host: "localhost",
                 port: 5432,
                 username: "postgres",
                 password: "1234",
-                database: "empleadosdb",
-                entities: [empleado_entity_1.Empleado],
+                database: "dsm44",
+                entities: [empleado_entity_1.Empleado, registro_asistencia_entity_1.RegistroAsistencia, registro_produccion_entity_1.RegistroProduccion],
                 synchronize: true,
                 autoLoadEntities: true,
             }),
             typeorm_1.TypeOrmModule.forRoot({
+                name: "conexion-postgres-form",
                 type: "postgres",
                 host: "localhost",
                 port: 5432,
                 username: "postgres",
                 password: "1234",
-                database: "clinica",
+                database: "formularios",
                 entities: [clinica_entity_1.Clinica],
                 synchronize: true,
                 autoLoadEntities: true,
             }),
+            empleados_module_1.EmpleadosModule,
             examples_module_1.ExamplesModule,
-            empleado_module_1.EmpleadoModule,
             clinica_module_1.ClinicaModule,
             sensor_module_1.SensorModule
         ],

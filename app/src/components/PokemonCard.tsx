@@ -54,7 +54,7 @@ export const PokemonCard = ({ id, name, picture, url }: Props) => {
                 />
                 <Image
                     style={style.pokeball}
-                    source={require("../../assets/pokeball-light.png")} // ✅ corregido nombre del asset
+                    source={require("../../assets/pokeball-light.png")} //
                 />
                 <Image style={style.pokemon} source={{ uri: picture }} />
                 <Text style={style.name}>

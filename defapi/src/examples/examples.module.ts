@@ -10,7 +10,8 @@ import { Example } from './entities/example.entity';
   imports: [
     TypeOrmModule.forFeature([
       Example
-    ])
+    ],
+      "conexion-postgres-form")
   ],
   controllers: [ExamplesController],
   providers: [ExamplesService],

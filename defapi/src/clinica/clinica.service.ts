@@ -8,7 +8,7 @@ import { UpdateClinicaDto } from './dto/update-clinica.dto';
 @Injectable()
 export class ClinicaService {
   constructor(
-    @InjectRepository(Clinica)
+    @InjectRepository(Clinica, "conexion-postgres-form")
     private readonly clinicaMedicaRepository: Repository<Clinica>,
   ) { }
 

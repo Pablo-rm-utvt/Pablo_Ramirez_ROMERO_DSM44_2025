@@ -18,7 +18,7 @@ exports.ClinicaModule = ClinicaModule;
 exports.ClinicaModule = ClinicaModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            typeorm_1.TypeOrmModule.forFeature([clinica_entity_1.Clinica])
+            typeorm_1.TypeOrmModule.forFeature([clinica_entity_1.Clinica], "conexion-postgres-form")
         ],
         controllers: [clinica_controller_1.ClinicaController],
         providers: [clinica_service_1.ClinicaService],

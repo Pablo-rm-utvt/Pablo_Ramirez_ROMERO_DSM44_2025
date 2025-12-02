@@ -3,9 +3,9 @@ import { View, Text, FlatList, RefreshControl } from 'react-native';
 import { useNavigation, useIsFocused } from "@react-navigation/native";
 import { StackNavigationProp } from '@react-navigation/stack';
 import { appTheme } from '../../themes/appTheme';
-import { useExampleApi } from '../../hooks/useExampleApi';
+import { useExampleApi } from '../../hooks/example/useExampleApi';
 import { ExampleCard } from '../../components/ExampleCard';
-import { FormDataExample } from '../../hooks/useExampleForm';
+import { FormDataExample } from '../../hooks/example/useExampleForm';
 import { BtnTouch } from '../../components/BtnTouch';
 import { RootStackParams } from '../../navigator/ExampleNavigator';
 

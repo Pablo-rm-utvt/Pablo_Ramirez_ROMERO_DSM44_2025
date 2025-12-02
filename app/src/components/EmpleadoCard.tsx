@@ -1,38 +1,88 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import React from "react";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { Datum } from "../interfaces/empleadosInterface";
 
-type Props = {
-  empleado: any;
-  onPress?: () => void;
-};
 
-export const EmpleadoCard: React.FC<Props> = ({ empleado, onPress }) => {
-  return (
-    <TouchableOpacity onPress={onPress} style={styles.card}>
-      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-        {empleado.foto_perfil ? (
-          <Image source={{ uri: `data:image/jpeg;base64,${empleado.foto_perfil}` }} style={styles.avatar} />
-        ) : null}
-        <View style={{ marginLeft: 12 }}>
-          <Text style={styles.title}>{empleado.nombre}</Text>
-          <Text style={styles.subtitle}>{empleado.cargo} • {empleado.area || ''}</Text>
-          <Text style={styles.small}>{empleado.correo}</Text>
-        </View>
-      </View>
-    </TouchableOpacity>
-  );
-};
+interface Props {
+    empleado: Datum | any;
+}
 
-const styles = StyleSheet.create({
-  card: {
-    padding: 12,
-    borderBottomWidth: 1,
-    borderBottomColor: '#eee',
-  },
-  title: { fontSize: 16, fontWeight: '600' },
-  subtitle: { fontSize: 13, color: '#555' },
-  small: { fontSize: 12, color: '#777' },
-  avatar: { width: 56, height: 56, borderRadius: 28 },
+
+
+export const EmpleadoCard = ({ empleado }: Props) => {
+    const navigation = useNavigation<any>();
+
+    const handlePress = () => {
+        navigation.navigate('EmpleadoDetail', { empleado });
+    };
+
+    return (
+        <TouchableOpacity onPress={handlePress}>
+
+            <View style={style.cardContainer}>
+
+                <Image style={style.image}
+
+                    source={require("../../assets/empleado.png")}
+                />
+                <Text style={style.name}>{empleado.nombre} {empleado.apellido_p}</Text>
+                <Text style={style.area}>Área: {empleado.area}</Text>
+                <Text style={style.turno}>Turno: {empleado.turno}</Text>
+            </View>
+        </TouchableOpacity>
+    );
+
+}
+
+
+const style = StyleSheet.create({
+    cardContainer: {
+        shadowColor: "#6d8ae9ff",
+        textAlign: "center",
+        justifyContent: "center",
+        alignItems: "center",
+        marginHorizontal: 10,
+        borderColor: "black",
+        borderWidth: 2,
+        width: 300,
+        height: 100,
+        marginTop: 20,
+        marginBottom: 25,
+        borderRadius: 20,
+        overflow: "hidden",
+        backgroundColor: "#55a0f6ff",
+    },
+
+    name: {
+        fontSize: 20,
+        marginHorizontal: 10,
+        alignSelf: "flex-end",
+        fontWeight: "bold",
+        color: 'white',
+        marginBottom: 10
+    },
+    image: {
+        position: "absolute",
+        width: 60,
+        height: 90,
+        right: 220,
+        marginLeft: 10,
+        marginTop: 10
+    },
+    area: {
+        color: "white",
+        fontSize: 12,
+        marginHorizontal: 10,
+        alignSelf: "flex-end",
+        fontWeight: "bold",
+        marginBottom: 8
+    },
+    turno: {
+        color: "white",
+        fontSize: 12,
+        marginHorizontal: 10,
+        alignSelf: "flex-end",
+        fontWeight: "bold"
+    }
 });
-
-export default EmpleadoCard;

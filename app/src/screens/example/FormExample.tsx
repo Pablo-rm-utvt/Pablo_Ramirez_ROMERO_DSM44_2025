@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { View, Text, TextInput, Image, ScrollView, StyleSheet } from 'react-native';
 import { BtnTouch } from '../../components/BtnTouch';
-import { useFormE, FormDataExample } from '../../hooks/useExampleForm';
-import { useExampleApi } from '../../hooks/useExampleApi';
+import { useFormE, FormDataExample } from '../../hooks/example/useExampleForm';
+import { useExampleApi } from '../../hooks/example/useExampleApi';
 import { useImagePicker } from '../../hooks/useImagePicker';
 
 interface Props {

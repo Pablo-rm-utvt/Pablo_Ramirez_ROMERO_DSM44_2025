@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, Text, FlatList, ActivityIndicator, StyleSheet } from 'react-native';
-import { useClinicaApi } from '../../hooks/useClinicaApi';
+import { useClinicaApi } from '../../hooks/clinica/useClinicaApi';
 import { PacienteCard } from '../../components/PacienteCard';
 import { Fab } from '../../components/Fab';
 import { StackScreenProps } from '@react-navigation/stack';
-import { RootStackParamList } from '../../navigator/types';
+import { RootStackParamList } from '../../interfaces/clinicaInterfaces';
 
 type Props = StackScreenProps<RootStackParamList, 'HomeClinica'>;
 
@@ -33,8 +33,8 @@ export const HomeClinica = ({ navigation }: Props) => {
                     <PacienteCard
                         paciente={item}
                         onPress={() => {
-                            navigation.navigate('PacienteDetail', { 
-                                paciente: item 
+                            navigation.navigate('PacienteDetail', {
+                                paciente: item
                             });
                         }}
                     />

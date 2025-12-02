@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, FlatList, Image, ActivityIndicator } from 'react-native';
-import { useSensorPaginated } from '../../hooks/useSensorPaginated';
+import { useSensorPaginated } from '../../hooks/sensor/useSensorPaginated';
 import { SensorCard } from '../../components/SensorCard';
 
 export const SensorScreen = () => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Dimensions, ScrollView, RefreshControl } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
-import { useSensorData } from '../../hooks/useSensorData';
+import { useSensorData } from '../../hooks/sensor/useSensorData';
 import { appTheme } from '../../themes/appTheme';
 
 export const SensorData = () => {
@@ -10,7 +10,7 @@ export const SensorData = () => {
 
     const chartConfig = {
         backgroundColor: "black",
-        backgroundGradientFrom: "pink",
+        backgroundGradientFrom: "blue",
         backgroundGradientTo: "#132f4bff",
         decimalPlaces: 2,
         color: (opacity = 1) => `rgba(255,255,255,${opacity})`,

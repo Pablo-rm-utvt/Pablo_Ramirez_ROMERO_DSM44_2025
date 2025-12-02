@@ -47,12 +47,19 @@ export const DrawerMenu = ({ navigation }: DrawerContentComponentProps) => {
                     EJEMPLOS
                 </Text>
 
+
                 <View style={{ width: '85%', gap: 12 }}>
                     <TouchableOpacity
                         style={styles.menuButton}
-                        onPress={() => navigation.navigate('EmpleadoNavigator')}
+                        onPress={() => navigation.navigate('LocationScreen')}
                     >
-                        <Text style={styles.menuButtonText}>Empleados</Text>
+                        <Text style={styles.menuButtonText}>Ubicacion</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={styles.menuButton}
+                        onPress={() => navigation.navigate('QrScannerScreen')}
+                    >
+                        <Text style={styles.menuButtonText}>Codigo QR</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={styles.menuButton}
@@ -93,6 +100,13 @@ export const DrawerMenu = ({ navigation }: DrawerContentComponentProps) => {
                         onPress={() => navigation.navigate('ClinicaNavigator')}
                     >
                         <Text style={styles.menuButtonText}>Clínica</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                        style={styles.menuButton}
+                        onPress={() => navigation.navigate('EmpleadoNavigator')}
+                    >
+                        <Text style={styles.menuButtonText}>Empleados</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity
