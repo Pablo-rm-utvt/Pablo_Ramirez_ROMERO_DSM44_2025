@@ -1,7 +1,7 @@
-import axios from "axios";
+import axios from 'axios';
 
 export const clinicaApi = axios.create({
-    baseURL: 'http://192.168.100.12:3000',  // Ajusta esta IP a la de tu servidor
+    baseURL: 'http://192.168.151.243:3000',
     timeout: 5000,
     headers: {
         'Content-Type': 'application/json',

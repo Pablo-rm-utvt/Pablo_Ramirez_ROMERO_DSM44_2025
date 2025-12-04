@@ -5,20 +5,20 @@ import { PacientesActivos } from "../interfaces/pacientesInterface";
 interface UsePacientesReturn {
     isLoading: boolean;
     pacientes: PacientesActivos[];
-    loadPacientes: () => void;
+    cargarPacientes: () => void;
 }
 
 export const usePacientes = (): UsePacientesReturn => {
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [pacientes, setPacientes] = useState<PacientesActivos[]>([]);
-    const nextPageUrl = useRef<string>("/pacientes/activos");
+    const urlSiguiente = useRef<string>("/pacientes/activos");
 
-    const loadPacientes = async () => {
+    const cargarPacientes = async () => {
         if (isLoading) return;
         setIsLoading(true);
 
-        const respuesta = await pacientesApi.get<PacientesActivos[]>(nextPageUrl.current);
+        const respuesta = await pacientesApi.get<PacientesActivos[]>(urlSiguiente.current);
 
         if (Array.isArray(respuesta.data) && respuesta.data.length > 0) {
             setPacientes((prevList) => [...prevList, ...respuesta.data]);
@@ -28,9 +28,9 @@ export const usePacientes = (): UsePacientesReturn => {
     }
 
     useEffect(() => {
-        loadPacientes();
+        cargarPacientes();
     }, []);
 
-    return { isLoading, pacientes, loadPacientes };
+    return { isLoading, pacientes, cargarPacientes };
 
 }

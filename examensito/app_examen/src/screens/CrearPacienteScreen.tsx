@@ -23,15 +23,15 @@ export const CrearPacienteScreen = () => {
     const [modoEdicion, setModoEdicion] = useState<boolean>(false);
     const [itemSeleccionado, setItemSeleccionado] = useState<any>(null);
 
-    const { pacientes, loadPacientes, isLoading: isLoadingPacientes } = usePacientesActivos();
+    const { pacientes, cargarPacientes, isLoading: estaCargandoPacientes } = usePacientesActivos();
 
     useEffect(() => {
-        loadPacientes(true);
-    }, [loadPacientes]);
+        cargarPacientes(true);
+    }, [cargarPacientes]);
 
     const {
         state: statePaciente,
-        isLoading: isLoadingPaciente,
+        isLoading: estaCargandoPaciente,
         handleInputChange: handlePacienteChange,
         handleSubmit: handlePacienteSubmit,
         resetForm: resetPacienteForm,
@@ -52,7 +52,7 @@ export const CrearPacienteScreen = () => {
             resetPacienteForm();
             setModoEdicion(false);
             setActiveTab("listar");
-            await loadPacientes(true);
+            await cargarPacientes(true);
         } catch (error) {
             Alert.alert("Error", "No se pudo crear/actualizar el paciente");
         }
@@ -64,7 +64,7 @@ export const CrearPacienteScreen = () => {
             resetPacienteForm();
             setModoEdicion(false);
             setActiveTab("paciente");
-            await loadPacientes(true);
+            await cargarPacientes(true);
         } catch (error) {
             Alert.alert("Error", "No se pudo eliminar el paciente");
         }
@@ -89,7 +89,7 @@ export const CrearPacienteScreen = () => {
 
     const {
         state: stateTratamiento,
-        isLoading: isLoadingTratamiento,
+        isLoading: estaCargandoTratamiento,
         handleInputChange: handleTratamientoChange,
         handleSubmit: handleTratamientoSubmit,
         resetForm: resetTratamientoForm,
@@ -125,7 +125,7 @@ export const CrearPacienteScreen = () => {
 
     const {
         state: stateMedicamento,
-        isLoading: isLoadingMedicamento,
+        isLoading: estaCargandoMedicamento,
         handleInputChange: handleMedicamentoChange,
         handleSubmit: handleMedicamentoSubmit,
         resetForm: resetMedicamentoForm,
@@ -212,7 +212,7 @@ export const CrearPacienteScreen = () => {
                             placeholder="Nombre *"
                             value={statePaciente.nombre}
                             onChangeText={(value) => handlePacienteChange("nombre", value)}
-                            editable={!isLoadingPaciente}
+                            editable={!estaCargandoPaciente}
                         />
 
                         <TextInput
@@ -220,7 +220,7 @@ export const CrearPacienteScreen = () => {
                             placeholder="Apellido *"
                             value={statePaciente.apellido}
                             onChangeText={(value) => handlePacienteChange("apellido", value)}
-                            editable={!isLoadingPaciente}
+                            editable={!estaCargandoPaciente}
                         />
 
                         <TextInput
@@ -228,7 +228,7 @@ export const CrearPacienteScreen = () => {
                             placeholder="Fecha de Nacimiento (YYYY-MM-DD) *"
                             value={statePaciente.fecha_nacimiento}
                             onChangeText={(value) => handlePacienteChange("fecha_nacimiento", value)}
-                            editable={!isLoadingPaciente}
+                            editable={!estaCargandoPaciente}
                         />
 
                         <TextInput
@@ -236,7 +236,7 @@ export const CrearPacienteScreen = () => {
                             placeholder="Sexo (M/F)"
                             value={statePaciente.sexo}
                             onChangeText={(value) => handlePacienteChange("sexo", value)}
-                            editable={!isLoadingPaciente}
+                            editable={!estaCargandoPaciente}
                         />
 
                         <TextInput
@@ -245,7 +245,7 @@ export const CrearPacienteScreen = () => {
                             value={statePaciente.telefono}
                             onChangeText={(value) => handlePacienteChange("telefono", value)}
                             keyboardType="phone-pad"
-                            editable={!isLoadingPaciente}
+                            editable={!estaCargandoPaciente}
                         />
 
                         <TextInput
@@ -253,7 +253,7 @@ export const CrearPacienteScreen = () => {
                             placeholder="Dirección"
                             value={statePaciente.direccion}
                             onChangeText={(value) => handlePacienteChange("direccion", value)}
-                            editable={!isLoadingPaciente}
+                            editable={!estaCargandoPaciente}
                         />
 
                         <TextInput
@@ -261,7 +261,7 @@ export const CrearPacienteScreen = () => {
                             placeholder="Tipo de Sangre"
                             value={statePaciente.tipo_sangre}
                             onChangeText={(value) => handlePacienteChange("tipo_sangre", value)}
-                            editable={!isLoadingPaciente}
+                            editable={!estaCargandoPaciente}
                         />
 
                         <TextInput
@@ -271,16 +271,16 @@ export const CrearPacienteScreen = () => {
                             onChangeText={(value) => handlePacienteChange("alergias", value)}
                             multiline={true}
                             numberOfLines={4}
-                            editable={!isLoadingPaciente}
+                            editable={!estaCargandoPaciente}
                         />
 
                         <View style={styles.buttonRow}>
                             <TouchableOpacity
-                                style={[styles.button, styles.buttonFlex, isLoadingPaciente && styles.buttonDisabled]}
+                                style={[styles.button, styles.buttonFlex, estaCargandoPaciente && styles.buttonDisabled]}
                                 onPress={handleCreatePaciente}
-                                disabled={isLoadingPaciente}
+                                disabled={estaCargandoPaciente}
                             >
-                                {isLoadingPaciente ? (
+                                {estaCargandoPaciente ? (
                                     <ActivityIndicator color="#FFF" size="small" />
                                 ) : (
                                     <Text style={styles.buttonText}>
@@ -288,12 +288,12 @@ export const CrearPacienteScreen = () => {
                                     </Text>
                                 )}
                             </TouchableOpacity>
-                            
+
                             {modoEdicion && (
                                 <TouchableOpacity
-                                    style={[styles.button, styles.buttonDelete, styles.buttonFlex, isLoadingPaciente && styles.buttonDisabled]}
+                                    style={[styles.button, styles.buttonDelete, styles.buttonFlex, estaCargandoPaciente && styles.buttonDisabled]}
                                     onPress={handleEliminarPaciente}
-                                    disabled={isLoadingPaciente}
+                                    disabled={estaCargandoPaciente}
                                 >
                                     <Text style={styles.buttonText}>Eliminar</Text>
                                 </TouchableOpacity>
@@ -312,7 +312,7 @@ export const CrearPacienteScreen = () => {
                             placeholder="Diagnóstico *"
                             value={stateTratamiento.diagnostico}
                             onChangeText={(value) => handleTratamientoChange("diagnostico", value)}
-                            editable={!isLoadingTratamiento}
+                            editable={!estaCargandoTratamiento}
                         />
 
                         <TextInput
@@ -320,7 +320,7 @@ export const CrearPacienteScreen = () => {
                             placeholder="Medicamento *"
                             value={stateTratamiento.medicamento}
                             onChangeText={(value) => handleTratamientoChange("medicamento", value)}
-                            editable={!isLoadingTratamiento}
+                            editable={!estaCargandoTratamiento}
                         />
 
                         <TextInput
@@ -328,7 +328,7 @@ export const CrearPacienteScreen = () => {
                             placeholder="Dosis *"
                             value={stateTratamiento.dosis}
                             onChangeText={(value) => handleTratamientoChange("dosis", value)}
-                            editable={!isLoadingTratamiento}
+                            editable={!estaCargandoTratamiento}
                         />
 
                         <TextInput
@@ -336,7 +336,7 @@ export const CrearPacienteScreen = () => {
                             placeholder="Fecha de Inicio (YYYY-MM-DD)"
                             value={stateTratamiento.fecha_inicio}
                             onChangeText={(value) => handleTratamientoChange("fecha_inicio", value)}
-                            editable={!isLoadingTratamiento}
+                            editable={!estaCargandoTratamiento}
                         />
 
                         <TextInput
@@ -344,7 +344,7 @@ export const CrearPacienteScreen = () => {
                             placeholder="Fecha de Fin (YYYY-MM-DD)"
                             value={stateTratamiento.fecha_fin}
                             onChangeText={(value) => handleTratamientoChange("fecha_fin", value)}
-                            editable={!isLoadingTratamiento}
+                            editable={!estaCargandoTratamiento}
                         />
 
                         <TextInput
@@ -354,16 +354,16 @@ export const CrearPacienteScreen = () => {
                             onChangeText={(value) => handleTratamientoChange("notas", value)}
                             multiline={true}
                             numberOfLines={4}
-                            editable={!isLoadingTratamiento}
+                            editable={!estaCargandoTratamiento}
                         />
 
                         <View style={styles.buttonRow}>
                             <TouchableOpacity
-                                style={[styles.button, styles.buttonFlex, isLoadingTratamiento && styles.buttonDisabled]}
+                                style={[styles.button, styles.buttonFlex, estaCargandoTratamiento && styles.buttonDisabled]}
                                 onPress={handleCreateTratamiento}
-                                disabled={isLoadingTratamiento}
+                                disabled={estaCargandoTratamiento}
                             >
-                                {isLoadingTratamiento ? (
+                                {estaCargandoTratamiento ? (
                                     <ActivityIndicator color="#FFF" size="small" />
                                 ) : (
                                     <Text style={styles.buttonText}>Crear Tratamiento</Text>
@@ -383,7 +383,7 @@ export const CrearPacienteScreen = () => {
                             placeholder="Medicamento *"
                             value={stateMedicamento.medicamento}
                             onChangeText={(value) => handleMedicamentoChange("medicamento", value)}
-                            editable={!isLoadingMedicamento}
+                            editable={!estaCargandoMedicamento}
                         />
 
                         <TextInput
@@ -391,7 +391,7 @@ export const CrearPacienteScreen = () => {
                             placeholder="Dosis *"
                             value={stateMedicamento.dosis}
                             onChangeText={(value) => handleMedicamentoChange("dosis", value)}
-                            editable={!isLoadingMedicamento}
+                            editable={!estaCargandoMedicamento}
                         />
 
                         <TextInput
@@ -399,7 +399,7 @@ export const CrearPacienteScreen = () => {
                             placeholder="Frecuencia (Ej: cada 8 horas) *"
                             value={stateMedicamento.frecuencia}
                             onChangeText={(value) => handleMedicamentoChange("frecuencia", value)}
-                            editable={!isLoadingMedicamento}
+                            editable={!estaCargandoMedicamento}
                         />
 
                         <TextInput
@@ -407,7 +407,7 @@ export const CrearPacienteScreen = () => {
                             placeholder="Fecha de Inicio (YYYY-MM-DD)"
                             value={stateMedicamento.fecha_inicio}
                             onChangeText={(value) => handleMedicamentoChange("fecha_inicio", value)}
-                            editable={!isLoadingMedicamento}
+                            editable={!estaCargandoMedicamento}
                         />
 
                         <TextInput
@@ -415,16 +415,16 @@ export const CrearPacienteScreen = () => {
                             placeholder="Fecha de Fin (YYYY-MM-DD)"
                             value={stateMedicamento.fecha_fin}
                             onChangeText={(value) => handleMedicamentoChange("fecha_fin", value)}
-                            editable={!isLoadingMedicamento}
+                            editable={!estaCargandoMedicamento}
                         />
 
                         <View style={styles.buttonRow}>
                             <TouchableOpacity
-                                style={[styles.button, styles.buttonFlex, isLoadingMedicamento && styles.buttonDisabled]}
+                                style={[styles.button, styles.buttonFlex, estaCargandoMedicamento && styles.buttonDisabled]}
                                 onPress={handleCreateMedicamento}
-                                disabled={isLoadingMedicamento}
+                                disabled={estaCargandoMedicamento}
                             >
-                                {isLoadingMedicamento ? (
+                                {estaCargandoMedicamento ? (
                                     <ActivityIndicator color="#FFF" size="small" />
                                 ) : (
                                     <Text style={styles.buttonText}>Crear Medicamento</Text>
@@ -437,7 +437,7 @@ export const CrearPacienteScreen = () => {
                 {activeTab === "listar" && (
                     <View style={styles.formContainer}>
                         <Text style={styles.formTitle}>Pacientes</Text>
-                        {isLoadingPacientes && pacientes.length === 0 ? (
+                        {estaCargandoPacientes && pacientes.length === 0 ? (
                             <ActivityIndicator size="large" color="#3B82F6" style={{ marginTop: 20 }} />
                         ) : pacientes.length === 0 ? (
                             <Text style={styles.emptyText}>No hay pacientes registrados</Text>
@@ -466,25 +466,7 @@ export const CrearPacienteScreen = () => {
                                             >
                                                 <Text style={styles.buttonActionText}>Editar</Text>
                                             </TouchableOpacity>
-                                            <TouchableOpacity
-                                                style={[styles.buttonAction, styles.deleteButton]}
-                                                onPress={() => {
-                                                    setPacienteFormData({
-                                                        id_paciente: item.id_paciente,
-                                                        nombre: item.nombre,
-                                                        apellido: item.apellido,
-                                                        fecha_nacimiento: item.fecha_nacimiento,
-                                                        sexo: item.sexo,
-                                                        telefono: item.telefono,
-                                                        direccion: item.direccion,
-                                                        tipo_sangre: item.tipo_sangre,
-                                                        alergias: item.alergias,
-                                                    });
-                                                    handleEliminarPaciente();
-                                                }}
-                                            >
-                                                <Text style={styles.buttonActionText}>Eliminar</Text>
-                                            </TouchableOpacity>
+
                                         </View>
                                     </View>
                                 )}

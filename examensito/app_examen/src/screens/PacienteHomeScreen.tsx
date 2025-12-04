@@ -50,7 +50,6 @@ export const PacienteHomeScreen = ({ route }: Props) => {
                 />
             }
         >
-            {/* Header de Paciente */}
             <View style={[styles.headerCard, { borderLeftColor: colorBySangre }]}>
                 <View style={styles.headerTop}>
                     <View style={[styles.avatarLarge, { backgroundColor: colorBySangre }]}>
@@ -79,7 +78,6 @@ export const PacienteHomeScreen = ({ route }: Props) => {
                 </View>
             </View>
 
-            {/* Sección de Información Personal */}
             <View style={styles.section}>
                 <View style={styles.sectionHeader}>
                     <Text style={styles.sectionTitle}>📋 Información Personal</Text>
@@ -107,7 +105,6 @@ export const PacienteHomeScreen = ({ route }: Props) => {
                 />
             </View>
 
-            {/* Sección de Información Médica */}
             <View style={styles.section}>
                 <View style={styles.sectionHeader}>
                     <Text style={styles.sectionTitle}>🏥 Información Médica</Text>

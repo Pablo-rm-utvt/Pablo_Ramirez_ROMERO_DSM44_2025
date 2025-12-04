@@ -5,54 +5,52 @@ import { Character, CharactersResponse } from "../interfaces/characterInterfaces
 
 
 interface UseCharactersPaginated {
-    characters: Character[];
-    isLoading: boolean;
-    loadCharacters: () => void;
+    personajes: Character[];
+    estaCargando: boolean;
+    cargarPersonajes: () => void;
 }
 
 
 export const useCharactersPaginated = (): UseCharactersPaginated => {
 
-    const [isLoading, setIsLoading] = useState(true);
-    const [characters, setCharacters] = useState<Character[]>([]);
-    const nextPageUrl = useRef<string | null>('https://rickandmortyapi.com/api/character');
+    const [estaCargando, setEstaCargando] = useState(true);
+    const [personajes, setPersonajes] = useState<Character[]>([]);
+    const urlSiguiente = useRef<string | null>('https://rickandmortyapi.com/api/character');
 
 
-    const loadCharacters = async () => {
-        if (!nextPageUrl.current) return;
-        setIsLoading(true);
-        const resp = await apiRick.get<CharactersResponse>(nextPageUrl.current);
-        console.log("API response:", resp.data);
-        nextPageUrl.current = resp.data.info.next;
-        mapCharactersList(resp.data.results);
-        console.log("Next page URL:", nextPageUrl.current);
+    const cargarPersonajes = async () => {
+        if (!urlSiguiente.current) return;
+        setEstaCargando(true);
+        const respuesta = await apiRick.get<CharactersResponse>(urlSiguiente.current);
+        urlSiguiente.current = respuesta.data.info.next;
+        mapearListaPersonajes(respuesta.data.results);
     }
 
 
-    const mapCharactersList = (CharacterList: Character[]) => {
-        const simpleList = CharacterList.map(({ name, url }) => {
-            const urlParts = url.split('/');
-            const id = urlParts[urlParts.length - 1];
-            const image = `https://rickandmortyapi.com/api/character/avatar/${id}.jpeg`;
-            return { id, name, image };
+    const mapearListaPersonajes = (listaPersonajes: Character[]) => {
+        const listaSimple = listaPersonajes.map(({ name, url }) => {
+            const partesUrl = url.split('/');
+            const id = partesUrl[partesUrl.length - 1];
+            const imagen = `https://rickandmortyapi.com/api/character/avatar/${id}.jpeg`;
+            return { id, name, image: imagen };
         });
 
-        setCharacters(prev => {
-            const nuevosUnicos = CharacterList.filter(
-                nuevo => !prev.some(existente => existente.id === nuevo.id)
+        setPersonajes(anterior => {
+            const nuevosUnicos = listaPersonajes.filter(
+                nuevo => !anterior.some(existente => existente.id === nuevo.id)
             );
-            return [...prev, ...nuevosUnicos];
+            return [...anterior, ...nuevosUnicos];
         });
     };
 
     useEffect(() => {
-        loadCharacters();
+        cargarPersonajes();
     }, []);
 
     return {
-        characters,
-        isLoading,
-        loadCharacters
+        personajes,
+        estaCargando,
+        cargarPersonajes
 
     };
 

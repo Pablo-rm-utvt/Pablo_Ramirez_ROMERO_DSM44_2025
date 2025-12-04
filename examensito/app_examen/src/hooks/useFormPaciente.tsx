@@ -1,43 +1,6 @@
 import { useReducer, useEffect } from "react";
 import { pacientesApi } from "../api/pacientesApi";
-import { CreatePacienteDto, CitasPaciente, Tratamientos, Medicamentos } from "../interfaces/pacientesInterface";
-
-// ==================== INTERFACES ====================
-
-export interface FormPacienteData extends CreatePacienteDto {
-    id_paciente?: number;
-}
-
-export interface FormCitaData {
-    id_cita?: number;
-    id_paciente: number;
-    fecha: string;
-    hora: string;
-    motivo: string;
-    medico_asignado: string;
-    estatus: string;
-}
-
-export interface FormTratamientoData {
-    id_tratamiento?: number;
-    id_paciente: number;
-    diagnostico: string;
-    medicamento: string;
-    dosis: string;
-    fecha_inicio: string;
-    fecha_fin: string;
-    notas: string;
-}
-
-export interface FormMedicamentoData {
-    id_medicamento?: number;
-    id_paciente: number;
-    medicamento: string;
-    dosis: string;
-    frecuencia: string;
-    fecha_inicio: string;
-    fecha_fin: string;
-}
+import { CreatePacienteDto, CitasPaciente, Tratamientos, Medicamentos, FormPacienteData, FormCitaData, FormTratamientoData, FormMedicamentoData } from "../interfaces/pacientesInterface";
 
 export interface UseFormPaciente {
     state: FormPacienteData;
@@ -78,8 +41,6 @@ export interface UseFormMedicamento {
     setFormData: (data: FormMedicamentoData) => void;
     handleDelete: () => Promise<any>;
 }
-
-// ==================== HOOK PACIENTE ====================
 
 export const useFormPaciente = (): UseFormPaciente => {
 
@@ -190,8 +151,6 @@ export const useFormPaciente = (): UseFormPaciente => {
     };
 }
 
-// ==================== HOOK CITA ====================
-
 export const useFormCita = (idPaciente: number): UseFormCita => {
 
     const initialForm: FormCitaData = {
@@ -236,7 +195,6 @@ export const useFormCita = (idPaciente: number): UseFormCita => {
 
     const [state, dispatch] = useReducer(formReducer, { ...initialForm, isLoading: false });
 
-    // Actualizar id_paciente cuando cambie
     useEffect(() => {
         if (idPaciente && idPaciente > 0) {
             dispatch({ type: "setIdPaciente", payload: idPaciente });
@@ -251,7 +209,6 @@ export const useFormCita = (idPaciente: number): UseFormCita => {
         dispatch({ type: "setLoading", payload: true });
         try {
             const { id_cita, ...citaData } = state;
-            console.log("Enviando cita:", citaData);
             if (id_cita) {
                 const response = await pacientesApi.put(`/pacientes/citas/${id_cita}`, citaData);
                 return response.data;
@@ -312,8 +269,6 @@ export const useFormCita = (idPaciente: number): UseFormCita => {
     };
 }
 
-// ==================== HOOK TRATAMIENTO ====================
-
 export const useFormTratamiento = (idPaciente: number): UseFormTratamiento => {
 
     const initialForm: FormTratamientoData = {
@@ -359,7 +314,6 @@ export const useFormTratamiento = (idPaciente: number): UseFormTratamiento => {
 
     const [state, dispatch] = useReducer(formReducer, { ...initialForm, isLoading: false });
 
-    // Actualizar id_paciente cuando cambie
     useEffect(() => {
         if (idPaciente && idPaciente > 0) {
             dispatch({ type: "setIdPaciente", payload: idPaciente });
@@ -374,7 +328,6 @@ export const useFormTratamiento = (idPaciente: number): UseFormTratamiento => {
         dispatch({ type: "setLoading", payload: true });
         try {
             const { id_tratamiento, ...tratamientoData } = state;
-            console.log("Enviando tratamiento:", tratamientoData);
             if (id_tratamiento) {
                 const response = await pacientesApi.put(`/pacientes/tratamientos/${id_tratamiento}`, tratamientoData);
                 return response.data;
@@ -436,8 +389,6 @@ export const useFormTratamiento = (idPaciente: number): UseFormTratamiento => {
     };
 }
 
-// ==================== HOOK MEDICAMENTO ====================
-
 export const useFormMedicamento = (idPaciente: number): UseFormMedicamento => {
 
     const initialForm: FormMedicamentoData = {
@@ -447,6 +398,7 @@ export const useFormMedicamento = (idPaciente: number): UseFormMedicamento => {
         frecuencia: "",
         fecha_inicio: "",
         fecha_fin: "",
+        id_medicamento: undefined,
     }
 
     type Action = {
@@ -482,7 +434,6 @@ export const useFormMedicamento = (idPaciente: number): UseFormMedicamento => {
 
     const [state, dispatch] = useReducer(formReducer, { ...initialForm, isLoading: false });
 
-    // Actualizar id_paciente cuando cambie
     useEffect(() => {
         if (idPaciente && idPaciente > 0) {
             dispatch({ type: "setIdPaciente", payload: idPaciente });
@@ -509,8 +460,10 @@ export const useFormMedicamento = (idPaciente: number): UseFormMedicamento => {
     const handleDelete = async () => {
         dispatch({ type: "setLoading", payload: true });
         try {
-            console.warn("Los medicamentos no se pueden eliminar desde la API actual");
-            return null;
+            if (state.id_medicamento) {
+                await pacientesApi.delete(`/pacientes/medicamentos/${state.id_medicamento}`);
+                dispatch({ type: "resetForm" });
+            }
         } catch (error) {
             console.error("Error al eliminar medicamento:", error);
             throw error;

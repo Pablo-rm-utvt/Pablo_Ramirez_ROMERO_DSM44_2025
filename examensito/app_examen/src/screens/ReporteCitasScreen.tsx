@@ -51,7 +51,7 @@ export const ReporteCitasScreen = ({ route }: Props) => {
         </>
     );
 
-    const citasFiltradas = citas?.filter((cita: any) => 
+    const citasFiltradas = citas?.filter((cita: any) =>
         cita.motivo?.toLowerCase().includes(filtro.toLowerCase()) ||
         cita.medico_asignado?.toLowerCase().includes(filtro.toLowerCase())
     ) || [];

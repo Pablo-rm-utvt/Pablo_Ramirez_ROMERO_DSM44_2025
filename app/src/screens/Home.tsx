@@ -7,11 +7,7 @@ import { useCharactersPaginated } from "../hooks/useCharactersPaginated";
 
 export const Home = () => {
 
-    const { characters, isLoading, loadCharacters } = useCharactersPaginated();
-
-    console.log("Loading:", isLoading);
-    console.log("Characters array:", characters);
-
+    const { personajes, estaCargando, cargarPersonajes } = useCharactersPaginated();
 
     return (
 
@@ -20,12 +16,8 @@ export const Home = () => {
 
         >
             <FlatList
-                data={characters}
+                data={personajes}
                 keyExtractor={(item) => item.id.toString()}
-
-
-                //header
-
                 ListHeaderComponent={(
                     <View>
                         <Text style={{
@@ -51,23 +43,13 @@ export const Home = () => {
 
 
                 )}
-
-
-
-                //body
                 showsHorizontalScrollIndicator={false}
                 numColumns={2}
                 renderItem={({ item }) => (
                     <CharacterCard {...item} />
                 )}
-
-
-                //infinite scroll
-                onEndReached={loadCharacters}
+                onEndReached={cargarPersonajes}
                 onEndReachedThreshold={0.2}
-
-
-                //Foonter
                 ListFooterComponent={(
 
 
@@ -77,17 +59,7 @@ export const Home = () => {
 
                     />
                 )}
-
-
             />
-
-
-
-
-
-
-
-
         </View>
 
 

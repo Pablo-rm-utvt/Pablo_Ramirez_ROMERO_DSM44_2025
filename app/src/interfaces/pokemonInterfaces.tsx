@@ -1,5 +1,3 @@
-// https://app.quicktype.io/
-
 export interface NewPokemonList {
     id: string | number;
     name: string;
@@ -204,8 +202,6 @@ export interface Type {
     type: Species;
 }
 
-// Converts JSON strings to/from your types
-// and asserts the results of JSON.parse at runtime
 export class Convert {
     public static toPokemonSimple(json: string): PokemonSimple {
         return cast(JSON.parse(json), r("PokemonSimple"));

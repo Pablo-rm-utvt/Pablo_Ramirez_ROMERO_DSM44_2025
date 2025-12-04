@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { pacientesApi } from "../api/pacientesApi";
 
 export const useReporteAsistencia = () => {
     const [data, setData] = useState<any | null>(null);
@@ -7,10 +6,6 @@ export const useReporteAsistencia = () => {
 
     const loadData = async (id_empleado: number, fechaInicio: string, fechaFin: string) => {
         setIsLoading(true);
-        // const response = await empleadosApi.get<ReporteAsistencia>(
-        //     `${BASE_URL}/reporte-asistencia-empleado?id_empleado=${id_empleado}&fechaInicio=${fechaInicio}&fechaFin=${fechaFin}`
-        // );
-        // setData(response.data);
         setIsLoading(false);
     };
 
@@ -23,10 +18,6 @@ export const useAsistenciaEmpleado = () => {
 
     const loadData = async (id_empleado: number, fechaInicio: string, fechaFin: string) => {
         setIsLoading(true);
-        // const response = await empleadosApi.get<AsistenciaEmpleado>(
-        //     `${BASE_URL}/asistencia-empleado?id_empleado=${id_empleado}&fechaInicio=${fechaInicio}&fechaFin=${fechaFin}`
-        // );
-        // setData(response.data);
         setIsLoading(false);
     };
 
@@ -39,10 +30,6 @@ export const useNomina = () => {
 
     const loadData = async (id_empleado: number, fechaInicio: string, fechaFin: string) => {
         setIsLoading(true);
-        // const response = await empleadosApi.get<Nomina>(
-        //     `${BASE_URL}/nomina?id_empleado=${id_empleado}&fechaInicio=${fechaInicio}&fechaFin=${fechaFin}`
-        // );
-        // setData(response.data);
         setIsLoading(false);
     };
 
@@ -55,10 +42,6 @@ export const useDiasTrabajados = () => {
 
     const loadData = async (id_empleado: number, fechaInicio: string, fechaFin: string) => {
         setIsLoading(true);
-        // const response = await empleadosApi.get<DiasTrabajados[]>(
-        //     `${BASE_URL}/dias-trabajados?id_empleado=${id_empleado}&fechaInicio=${fechaInicio}&fechaFin=${fechaFin}`
-        // );
-        // setData(response.data);
         setIsLoading(false);
     };
 
@@ -71,10 +54,6 @@ export const useReporteProduccion = () => {
 
     const loadData = async (id_empleado: number, fechaInicio: string, fechaFin: string) => {
         setIsLoading(true);
-        // const response = await empleadosApi.get<ReporteProduccion[]>(
-        //     `${BASE_URL}/reporte-produccion?id_empleado=${id_empleado}&fechaInicio=${fechaInicio}&fechaFin=${fechaFin}`
-        // );
-        // setData(response.data);
         setIsLoading(false);
     };
 
@@ -87,10 +66,6 @@ export const useHorasTrabajadas = () => {
 
     const loadData = async (id_empleado: number, fechaInicio: string, fechaFin: string) => {
         setIsLoading(true);
-        // const response = await empleadosApi.get<HorasTrabajadas[]>(
-        //     `${BASE_URL}/horas-trabajadas?id_empleado=${id_empleado}&fechaInicio=${fechaInicio}&fechaFin=${fechaFin}`
-        // );
-        // setData(response.data);
         setIsLoading(false);
     };
 
@@ -103,10 +78,6 @@ export const useUnidadesProducidas = () => {
 
     const loadData = async (id_empleado: number, fechaInicio: string, fechaFin: string) => {
         setIsLoading(true);
-        // const response = await empleadosApi.get<UnidadesProducidas>(
-        //     `${BASE_URL}/unidades-producidas?id_empleado=${id_empleado}&fechaInicio=${fechaInicio}&fechaFin=${fechaFin}`
-        // );
-        // setData(response.data);
         setIsLoading(false);
     };
 

@@ -1,36 +1,56 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Image, ScrollView, Alert } from 'react-native';
 import { PacienteActions } from '../../components/PacienteActions';
 import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParamList } from '../../interfaces/clinicaInterfaces';
+import { useClinicaApi } from '../../hooks/clinica/useClinicaApi';
 
 type Props = StackScreenProps<RootStackParamList, 'PacienteDetail'>;
 
 export const PacienteDetail = ({ route, navigation }: Props) => {
     const { paciente } = route.params;
+    const { deletePaciente, cargarPacientes } = useClinicaApi();
 
     const handleEdit = (id: undefined | number) => {
         navigation.navigate('FormPaciente', { pacienteId: id });
     };
 
     const handleDelete = async (id: string | number) => {
-        try {
-            const baseUrl = 'http://192.168.100.12:3000/api';
-            const response = await fetch(`${baseUrl}/clinica/${id}`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
+        Alert.alert(
+            'Confirmar eliminación',
+            `¿Está seguro de que desea eliminar a ${paciente.nombre_paciente}?`,
+            [
+                {
+                    text: 'Cancelar',
+                    onPress: () => { },
+                    style: 'cancel'
                 },
-            });
-
-            if (!response.ok) {
-                const text = await response.text();
-                throw new Error(`Error al eliminar el paciente: ${response.status} ${text}`);
-            }
-            navigation.goBack();
-        } catch (error) {
-            console.error('Error al eliminar el paciente:', error);
-        }
+                {
+                    text: 'Eliminar',
+                    onPress: async () => {
+                        try {
+                            const result = await deletePaciente(Number(id));
+                            if (result.success) {
+                                // Recargar la lista de pacientes
+                                await cargarPacientes();
+                                Alert.alert('Éxito', 'Paciente eliminado correctamente', [
+                                    {
+                                        text: 'OK',
+                                        onPress: () => navigation.goBack()
+                                    }
+                                ]);
+                            } else {
+                                Alert.alert('Error', result.error || 'No se pudo eliminar el paciente');
+                            }
+                        } catch (error) {
+                            console.error('Error al eliminar:', error);
+                            Alert.alert('Error', 'Ocurrió un error al eliminar el paciente');
+                        }
+                    },
+                    style: 'destructive'
+                }
+            ]
+        );
     };
 
     return (
@@ -176,7 +196,7 @@ export const PacienteDetail = ({ route, navigation }: Props) => {
                 <PacienteActions
                     id={paciente.id}
                     onEdit={handleEdit.bind(this, paciente.id)}
-                    onDelete={handleDelete}
+                    onDelete={handleDelete.bind(this, paciente.id)}
                 />
             </View>
         </ScrollView>

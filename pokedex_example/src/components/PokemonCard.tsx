@@ -14,7 +14,6 @@ interface Props {
     url: string;
 }
 
-// 👇 Tipamos la navegación
 type NavigationProp = StackNavigationProp<RootStackParams, "HomePokemon">;
 
 export const PokemonCard = ({ id, name, picture, url }: Props) => {
@@ -22,7 +21,7 @@ export const PokemonCard = ({ id, name, picture, url }: Props) => {
 
     const navigation = useNavigation<NavigationProp>();
 
-    const { isLoading, color } = useTypeColorPokemon(id);
+    const { estaCargando, color } = useTypeColorPokemon(id);
 
     return (
         <TouchableOpacity
@@ -39,7 +38,7 @@ export const PokemonCard = ({ id, name, picture, url }: Props) => {
                 <View
                     style={{
                         ...style.backgroundTop,
-                        backgroundColor: isLoading
+                        backgroundColor: estaCargando
                             ? "gray"
                             : color.length > 1
                                 ? color[1]
@@ -49,7 +48,7 @@ export const PokemonCard = ({ id, name, picture, url }: Props) => {
                 <View
                     style={{
                         ...style.backgroundButtom,
-                        backgroundColor: isLoading ? "gray" : color[0],
+                        backgroundColor: estaCargando ? "gray" : color[0],
                     }}
                 />
                 <Image

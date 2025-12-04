@@ -9,7 +9,7 @@ interface Props extends StackScreenProps<any, any> { }
 
 export const FormPaciente = ({ route, navigation }: Props) => {
     const { createPaciente, updatePaciente, pacientes } = useClinicaApi();
-    const { pickImage } = useImagePicker();
+    const { seleccionarImagen } = useImagePicker();
     const pacienteToEdit = route.params?.pacienteId
         ? pacientes.find(p => p.id === route.params?.pacienteId)
         : undefined;
@@ -18,7 +18,7 @@ export const FormPaciente = ({ route, navigation }: Props) => {
         'foto_paciente' | 'radiografia_torax' | 'electrocardiograma' |
         'analisis_sangre' | 'resonancia_magnetica' | 'tomografia' | 'foto_herida'
     >) => {
-        const result = await pickImage();
+        const result = await seleccionarImagen();
         if (result) {
             setFormData({ ...formData, [field]: result });
         }
@@ -59,7 +59,6 @@ export const FormPaciente = ({ route, navigation }: Props) => {
     });
 
     const handleSubmit = async () => {
-        // Validación de campos requeridos
         const camposRequeridos = [
             'nombre_paciente',
             'edad',
@@ -89,7 +88,6 @@ export const FormPaciente = ({ route, navigation }: Props) => {
     return (
         <ScrollView style={styles.container}>
             <View style={styles.formContainer}>
-                {/* Información Personal */}
                 <Text style={styles.sectionTitle}>Información Personal</Text>
 
                 <Text style={styles.label}>Nombre del Paciente *</Text>
@@ -151,7 +149,6 @@ export const FormPaciente = ({ route, navigation }: Props) => {
                     onChangeText={(value) => setFormData({ ...formData, correo_electronico: value })}
                 />
 
-                {/* Información Médica */}
                 <Text style={styles.sectionTitle}>Información Médica</Text>
 
                 <Text style={styles.label}>Diagnóstico Inicial</Text>
@@ -209,7 +206,6 @@ export const FormPaciente = ({ route, navigation }: Props) => {
                     onChangeText={(value) => setFormData({ ...formData, area_internamiento: value })}
                 />
 
-                {/* Signos Vitales */}
                 <Text style={styles.sectionTitle}>Signos Vitales</Text>
 
                 <Text style={styles.label}>Presión Arterial</Text>
@@ -252,7 +248,6 @@ export const FormPaciente = ({ route, navigation }: Props) => {
                     multiline
                 />
 
-                {/* Sección de Imágenes y Estudios */}
                 <Text style={styles.sectionTitle}>Imágenes y Estudios Médicos</Text>
 
                 <View style={styles.imageSection}>

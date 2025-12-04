@@ -49,8 +49,8 @@ export const ReportesNavigatorPacientes = ({ paciente }: { paciente: PacientesAc
                 },
             }}
         >
-            <Drawer.Screen 
-                name="ReporteCitas" 
+            <Drawer.Screen
+                name="ReporteCitas"
                 component={ReporteCitasScreen}
                 options={{
                     drawerLabel: 'Citas',
@@ -58,8 +58,8 @@ export const ReportesNavigatorPacientes = ({ paciente }: { paciente: PacientesAc
                 }}
                 initialParams={{ paciente }}
             />
-            <Drawer.Screen 
-                name="ReporteMedicamentos" 
+            <Drawer.Screen
+                name="ReporteMedicamentos"
                 component={ReporteMedicamentosScreen}
                 options={{
                     drawerLabel: 'Medicamentos',
@@ -67,8 +67,8 @@ export const ReportesNavigatorPacientes = ({ paciente }: { paciente: PacientesAc
                 }}
                 initialParams={{ paciente }}
             />
-            <Drawer.Screen 
-                name="ReporteTratamientos" 
+            <Drawer.Screen
+                name="ReporteTratamientos"
                 component={ReporteTratamientosScreen}
                 options={{
                     drawerLabel: 'Tratamientos',
@@ -76,8 +76,8 @@ export const ReportesNavigatorPacientes = ({ paciente }: { paciente: PacientesAc
                 }}
                 initialParams={{ paciente }}
             />
-            <Drawer.Screen 
-                name="ReporteCitasCanceladas" 
+            <Drawer.Screen
+                name="ReporteCitasCanceladas"
                 component={ReporteCitasCanceladasScreen}
                 options={{
                     drawerLabel: 'Citas Canceladas',
@@ -85,8 +85,8 @@ export const ReportesNavigatorPacientes = ({ paciente }: { paciente: PacientesAc
                 }}
                 initialParams={{ paciente }}
             />
-            <Drawer.Screen 
-                name="ReporteCitasPorFecha" 
+            <Drawer.Screen
+                name="ReporteCitasPorFecha"
                 component={ReporteCitasPorFechaScreen}
                 options={{
                     drawerLabel: 'Citas por Fecha',
@@ -94,8 +94,8 @@ export const ReportesNavigatorPacientes = ({ paciente }: { paciente: PacientesAc
                 }}
                 initialParams={{ paciente }}
             />
-            <Drawer.Screen 
-                name="ReportePacientesPorTipoSangre" 
+            <Drawer.Screen
+                name="ReportePacientesPorTipoSangre"
                 component={ReportePacientesPorTipoSangreScreen}
                 options={{
                     drawerLabel: 'Por Tipo de Sangre',
@@ -103,8 +103,8 @@ export const ReportesNavigatorPacientes = ({ paciente }: { paciente: PacientesAc
                 }}
                 initialParams={{ paciente }}
             />
-            <Drawer.Screen 
-                name="ReportePacienteConCitas" 
+            <Drawer.Screen
+                name="ReportePacienteConCitas"
                 component={ReportePacienteConCitasScreen}
                 options={{
                     drawerLabel: 'Paciente Completo',

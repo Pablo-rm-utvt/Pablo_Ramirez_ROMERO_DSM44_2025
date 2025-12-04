@@ -83,7 +83,6 @@ export class UpdateClinicaDto {
     @IsString()
     area_internamiento?: string;
 
-    // SIGNOS VITALES
     @IsOptional()
     @IsString()
     presion_arterial?: string;
@@ -99,7 +98,6 @@ export class UpdateClinicaDto {
     @IsInt()
     saturacion_oxigeno?: number;
 
-    // NOTAS DE SEGUIMIENTO
     @IsOptional()
     @IsString()
     notas_evolucion?: string;
@@ -112,7 +110,6 @@ export class UpdateClinicaDto {
     @IsDateString()
     fecha_alta?: string;
 
-    // IMÁGENES (Base64) - Todas opcionales
     @IsOptional()
     @IsString()
     foto_paciente?: string;

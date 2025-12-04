@@ -1,4 +1,3 @@
-
 export interface Clinica {
     id: number;
     nombre_paciente: string;
@@ -24,8 +23,6 @@ export interface Clinica {
     firma_medico: string;
     fecha_alta: Date;
     grupo_sanguineo: string;
-
-    //imagenes
     foto_paciente: string;
     radiografia_torax: string;
     electrocardiograma: string;
@@ -36,7 +33,6 @@ export interface Clinica {
 }
 
 export type ClinicaResponse = Clinica;
-
 
 export type RootStackParamList = {
     HomeClinica: undefined;

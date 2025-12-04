@@ -41,7 +41,7 @@ export const PacienteDetailScreen = ({ route, navigation }: Props) => {
 
             <View style={style.section}>
                 <Text style={style.sectionTitle}>Información Personal</Text>
-                
+
                 <View style={style.detailRow}>
                     <Text style={style.label}>ID Paciente:</Text>
                     <Text style={style.value}>{p.id_paciente}</Text>
@@ -82,7 +82,7 @@ export const PacienteDetailScreen = ({ route, navigation }: Props) => {
                 </View>
             </View>
 
-            <TouchableOpacity 
+            <TouchableOpacity
                 style={style.reportButton}
                 onPress={handleGoToReports}
                 activeOpacity={0.8}

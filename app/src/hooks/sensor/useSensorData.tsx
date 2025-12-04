@@ -10,7 +10,7 @@ interface TypeData {
 }
 
 interface UseSensorData {
-    isLoading: boolean;
+    estaCargando: boolean;
     loadData: () => void;
     data: SensorDataResponse;
     today: TypeData;
@@ -20,22 +20,22 @@ interface UseSensorData {
 
 export const useSensorData = (): UseSensorData => {
 
-    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [estaCargando, setEstaCargando] = useState<boolean>(false);
     const [data, setData] = useState<SensorDataResponse>({} as SensorDataResponse);
     const [today, setToday] = useState<TypeData>({} as TypeData);
     const [yesterday, setYesterday] = useState<TypeData>({} as TypeData);
     const [beforeYesterday, setBeforeYesterday] = useState<TypeData>({} as TypeData);
 
-    const url: string = "http://192.168.100.12:3000/api/sensor/data";
+    const url: string = "http://192.168.151.243:3000/api/sensor/data";
 
     const loadData = async () => {
-        setIsLoading(true);
+        setEstaCargando(true);
         const response = await sensorApi.get<SensorDataResponse>(url);
         setData(response.data);
         chartData("today", data.today);
         chartData("yesterday", data.yesterday);
         chartData("beforeYesterday", data.beforeYesterday);
-        setIsLoading(false);
+        setEstaCargando(false);
     }
 
     const chartData = (type: string, data: any) => {
@@ -98,6 +98,6 @@ export const useSensorData = (): UseSensorData => {
         loadData();
     }, []);
 
-    return { isLoading, loadData, data, today, yesterday, beforeYesterday };
+    return { estaCargando, loadData, data, today, yesterday, beforeYesterday };
 
 }

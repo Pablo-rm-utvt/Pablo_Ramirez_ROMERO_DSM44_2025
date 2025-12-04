@@ -6,7 +6,7 @@ import { appTheme } from '../../themes/appTheme';
 
 export const SensorData = () => {
 
-    const { isLoading, data, today, yesterday, beforeYesterday, loadData } = useSensorData();
+    const { estaCargando, data, today, yesterday, beforeYesterday, loadData } = useSensorData();
 
     const chartConfig = {
         backgroundColor: "black",
@@ -33,7 +33,7 @@ export const SensorData = () => {
             refreshControl={
                 <RefreshControl
                     onRefresh={loadData}
-                    refreshing={isLoading}
+                    refreshing={estaCargando}
                 />
             }
         >
@@ -46,7 +46,7 @@ export const SensorData = () => {
                     <Text
                         style={appTheme.title}
                     >
-                        Total Registros: {(!isLoading) && data.numberRegisters}
+                        Total Registros: {(!estaCargando) && data.numberRegisters}
                     </Text>
                     <Text
                         style={appTheme.title}
@@ -56,9 +56,9 @@ export const SensorData = () => {
                     <Text
                         style={appTheme.title}
                     >
-                        Temperatura max: {(!isLoading) && today.max}
+                        Temperatura max: {(!estaCargando) && today.max}
                         {`\n`}
-                        Temperatura min: {(!isLoading) && today.min}
+                        Temperatura min: {(!estaCargando) && today.min}
                     </Text>
                     {data && today?.values && (
                         <LineChart
@@ -84,9 +84,9 @@ export const SensorData = () => {
                     <Text
                         style={appTheme.title}
                     >
-                        Temperatura max: {(!isLoading) && yesterday.max}
+                        Temperatura max: {(!estaCargando) && yesterday.max}
                         {`\n`}
-                        Temperatura min: {(!isLoading) && yesterday.min}
+                        Temperatura min: {(!estaCargando) && yesterday.min}
                     </Text>
                     {data && yesterday?.values && (
                         <LineChart
@@ -112,9 +112,9 @@ export const SensorData = () => {
                     <Text
                         style={appTheme.title}
                     >
-                        Temperatura max: {(!isLoading) && beforeYesterday.max}
+                        Temperatura max: {(!estaCargando) && beforeYesterday.max}
                         {`\n`}
-                        Temperatura min: {(!isLoading) && beforeYesterday.min}
+                        Temperatura min: {(!estaCargando) && beforeYesterday.min}
                     </Text>
                     {data && beforeYesterday?.labels && (
                         <LineChart

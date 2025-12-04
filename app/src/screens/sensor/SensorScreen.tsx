@@ -4,8 +4,7 @@ import { useSensorPaginated } from '../../hooks/sensor/useSensorPaginated';
 import { SensorCard } from '../../components/SensorCard';
 
 export const SensorScreen = () => {
-
-    const { loadSensor, simpleSensorList, isLoading } = useSensorPaginated();
+    const { loadSensor, simpleSensorList, estaCargando } = useSensorPaginated();
 
     return (
         <View
@@ -14,7 +13,6 @@ export const SensorScreen = () => {
             <FlatList
                 data={simpleSensorList}
                 keyExtractor={(sensor) => `${sensor.id}`}
-                // Header
                 ListHeaderComponent={(
                     <View style={{ alignSelf: 'center', alignContent: 'center' }}>
                         <Text
@@ -25,7 +23,7 @@ export const SensorScreen = () => {
                     </View>
                 )}
                 showsVerticalScrollIndicator={false}
-                numColumns={2} // Ojo si lo cambio debo reiniciar el app
+                numColumns={2}
                 renderItem={({ item }) => (
                     <SensorCard
                         {...item}
@@ -33,9 +31,8 @@ export const SensorScreen = () => {
                 )}
                 onEndReached={loadSensor}
                 onEndReachedThreshold={0.2}
-                // Footer
                 ListFooterComponent={
-                    isLoading ? (
+                    estaCargando ? (
                         <ActivityIndicator
                             style={{ height: 120 }}
                             size={60}

@@ -4,111 +4,86 @@ import { clinicaApi } from '../../api/clinicaApi';
 import { Clinica, ClinicaResponse } from '../../interfaces/clinicaInterfaces';
 
 export const useClinicaApi = () => {
-    const [isLoading, setIsLoading] = useState(true);
+    const [estaCargando, setEstaCargando] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [pacientes, setPacientes] = useState<Clinica[]>([]);
 
-    const loadPacientes = async () => {
-        setIsLoading(true);
+    const cargarPacientes = async () => {
+        setEstaCargando(true);
         setError(null);
         try {
-            const response = await clinicaApi.get<Clinica[]>('/api/clinica');
+            const response = await clinicaApi.get<Clinica[]>('/api/pacientes');
             setPacientes(response.data);
-            return { success: true, data: response.data };
-        } catch (error) {
-            let errorMessage = 'Error al cargar los pacientes';
-            if (axios.isAxiosError(error)) {
-                errorMessage = error.response?.data?.message || error.message;
-            }
-            return { success: false, error: errorMessage };
+        } catch (err) {
+            const msg = axios.isAxiosError(err)
+                ? err.response?.data?.message || err.message
+                : 'Error al cargar los pacientes';
+            setError(msg);
         } finally {
-            setIsLoading(false);
+            setEstaCargando(false);
         }
     };
 
     const createPaciente = async (paciente: Omit<Clinica, 'id'>) => {
-        setIsLoading(true);
-        setError(null);
+        setEstaCargando(true);
         try {
-            const pacienteConCamposRequeridos = {
-                ...paciente,
-                peso: 0,
-                estatura: 0
-            };
-            const response = await clinicaApi.post<ClinicaResponse>('/api/clinica', pacienteConCamposRequeridos);
-            setPacientes(prevPacientes => [...prevPacientes, response.data]);
+            const response = await clinicaApi.post<ClinicaResponse>('/api/pacientes', paciente);
+            setPacientes(prev => [...prev, response.data]);
             return { success: true, data: response.data };
-        } catch (error) {
-            let errorMessage = 'Error al crear el paciente';
-            if (axios.isAxiosError(error)) {
-                errorMessage = error.response?.data?.message || error.message;
-            }
-            setError(errorMessage);
-            console.error('Error creating paciente:', errorMessage);
-            return { success: false, error: errorMessage };
+        } catch (err) {
+            const msg = axios.isAxiosError(err)
+                ? err.response?.data?.message || err.message
+                : '';
+            setError(msg);
+            return { success: false, error: msg };
         } finally {
-            setIsLoading(false);
+            setEstaCargando(false);
         }
     };
 
     const updatePaciente = async (id: number, paciente: Partial<Clinica>) => {
-        setIsLoading(true);
-        setError(null);
+        setEstaCargando(true);
         try {
-            const pacienteConCamposRequeridos = {
-                ...paciente,
-                peso: 0,
-                estatura: 0
-            };
-            const response = await clinicaApi.put<ClinicaResponse>(`/api/clinica/${id}`, pacienteConCamposRequeridos);
-            setPacientes(prevPacientes =>
-                prevPacientes.map(p => p.id === id ? response.data : p)
-            );
+            const response = await clinicaApi.put<ClinicaResponse>(`/api/pacientes/${id}`, paciente);
+            setPacientes(prev => prev.map(p => p.id === id ? response.data : p));
             return { success: true, data: response.data };
-        } catch (error) {
-            let errorMessage = 'Error al actualizar el paciente';
-            if (axios.isAxiosError(error)) {
-                errorMessage = error.response?.data?.message || error.message;
-            }
-            setError(errorMessage);
-            console.error('Error updating paciente:', errorMessage);
-            return { success: false, error: errorMessage };
+        } catch (err) {
+            const msg = axios.isAxiosError(err)
+                ? err.response?.data?.message || err.message
+                : '';
+            setError(msg);
+            return { success: false, error: msg };
         } finally {
-            setIsLoading(false);
+            setEstaCargando(false);
         }
     };
 
     const deletePaciente = async (id: number) => {
-        setIsLoading(true);
-        setError(null);
+        setEstaCargando(true);
         try {
-            await clinicaApi.delete(`/api/clinica/${id}`);
-            setPacientes(prevPacientes =>
-                prevPacientes.filter(p => p.id !== id)
-            );
+            await clinicaApi.delete(`/api/pacientes/${id}`);
+            setPacientes(prev => prev.filter(p => p.id !== id));
             return { success: true };
-        } catch (error) {
-            let errorMessage = 'Error al eliminar el paciente';
-            if (axios.isAxiosError(error)) {
-                errorMessage = error.response?.data?.message || error.message;
-            }
-            setError(errorMessage);
-            console.error('Error deleting paciente:', errorMessage);
-            return { success: false, error: errorMessage };
+        } catch (err) {
+            const msg = axios.isAxiosError(err)
+                ? err.response?.data?.message || err.message
+                : 'Error al eliminar el paciente';
+            setError(msg);
+            return { success: false, error: msg };
         } finally {
-            setIsLoading(false);
+            setEstaCargando(false);
         }
     };
 
     useEffect(() => {
-        loadPacientes();
+        cargarPacientes();
     }, []);
 
     return {
-        isLoading,
+        estaCargando,
         error,
         pacientes,
-        loadPacientes,
+        cargarPacientes,
         createPaciente,
         updatePaciente,
         deletePaciente

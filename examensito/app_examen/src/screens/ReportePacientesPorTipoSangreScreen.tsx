@@ -8,7 +8,7 @@ type Props = DrawerScreenProps<ReportesDrawerParams, 'ReporteCitas'>;
 
 export const ReportePacientesPorTipoSangreScreen = () => {
     const [tipoSangre, setTipoSangre] = useState("O+");
-    const { data, isLoading, loadData } = usePacientesPorTipoSangre();
+    const { data, estaCargando, loadData } = usePacientesPorTipoSangre();
 
     const handleSearch = () => {
         if (tipoSangre.trim()) {
@@ -20,7 +20,7 @@ export const ReportePacientesPorTipoSangreScreen = () => {
         handleSearch();
     }, []);
 
-    if (isLoading) {
+    if (estaCargando) {
         return (
             <View style={style.containerLoading}>
                 <ActivityIndicator size={60} color="#3B82F6" />
@@ -54,7 +54,7 @@ export const ReportePacientesPorTipoSangreScreen = () => {
                     </View>
                 }
                 ListEmptyComponent={
-                    !isLoading && (
+                    !estaCargando && (
                         <View style={style.emptyContainer}>
                             <Text style={style.emptyText}>No hay pacientes con este tipo de sangre</Text>
                         </View>

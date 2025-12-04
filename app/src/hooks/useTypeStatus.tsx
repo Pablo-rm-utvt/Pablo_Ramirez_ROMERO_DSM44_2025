@@ -8,13 +8,13 @@ export interface TypeStatus {
 }
 
 interface UseTypeColorStatus {
-    isLoading: boolean;
+    estaCargando: boolean;
     color: string;
 }
 
 export const useTypeColorStatus = (_id: string | number): UseTypeColorStatus => {
 
-    const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [estaCargando, setEstaCargando] = useState<boolean>(true);
     const [color, setColor] = useState<string>("");
 
     const tipo: TypeStatus[] = [
@@ -30,12 +30,12 @@ export const useTypeColorStatus = (_id: string | number): UseTypeColorStatus => 
     const loadType = async () => {
 
         const response = await sensorApi.get<Datum>(
-            `http://192.168.100.12:3000/api/sensor/${_id}`
+            `http://192.168.151.243:3000/api/sensor/${_id}`
         );
 
         getColorType(response.data.estado);
 
-        setIsLoading(false);
+        setEstaCargando(false);
 
     };
 
@@ -43,5 +43,5 @@ export const useTypeColorStatus = (_id: string | number): UseTypeColorStatus => 
         loadType();
     }, []);
 
-    return { isLoading, color };
+    return { estaCargando, color };
 };

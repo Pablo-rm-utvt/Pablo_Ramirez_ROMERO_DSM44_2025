@@ -5,7 +5,6 @@ export class Clinica {
     @PrimaryGeneratedColumn()
     id: number;
 
-    // DATOS PRINCIPALES DEL PACIENTE
     @Column({ type: 'varchar', length: 255 })
     nombre_paciente: string;
 
@@ -27,7 +26,6 @@ export class Clinica {
     @Column({ type: 'varchar', length: 255, nullable: true })
     correo_electronico: string;
 
-    // INFORMACIÓN MÉDICA
     @Column({ type: 'timestamp', nullable: true })
     fecha_ingreso: Date;
 
@@ -35,7 +33,7 @@ export class Clinica {
     diagnostico_inicial: string;
 
     @Column({ type: 'text', nullable: true })
-    enfermedades_previas: string; // antecedentes médicos
+    enfermedades_previas: string;
 
     @Column({ type: 'text', nullable: true })
     medicamentos_actuales: string;
@@ -49,7 +47,6 @@ export class Clinica {
     @Column({ type: 'varchar', length: 255, nullable: true })
     area_internamiento: string;
 
-    // SIGNOS VITALES
     @Column({ type: 'varchar', length: 20, nullable: true })
     presion_arterial: string;
 
@@ -62,7 +59,6 @@ export class Clinica {
     @Column({ type: 'int', nullable: true })
     saturacion_oxigeno: number;
 
-    // SEGUIMIENTO
     @Column({ type: 'text', nullable: true })
     notas_evolucion: string;
 
@@ -72,7 +68,6 @@ export class Clinica {
     @Column({ type: 'timestamp', nullable: true })
     fecha_alta: Date;
 
-    // IMÁGENES/ARCHIVOS (Base64 o URL)
     @Column({ type: 'text', nullable: true })
     foto_paciente: string;
 

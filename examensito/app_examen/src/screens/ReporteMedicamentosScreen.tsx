@@ -8,7 +8,7 @@ type Props = DrawerScreenProps<PatientDrawerParams, 'Medicamentos'>;
 
 export const ReporteMedicamentosScreen = ({ route }: Props) => {
     const { paciente } = route.params as { paciente: any };
-    const { medicamentos, isLoading, loadMedicamentos } = useMedicamentosPaciente();
+    const { medicamentos, estaCargando, loadMedicamentos } = useMedicamentosPaciente();
     const [filtro, setFiltro] = useState("");
 
     const handleLoadData = () => {
@@ -47,7 +47,7 @@ export const ReporteMedicamentosScreen = ({ route }: Props) => {
         </>
     );
 
-    if (isLoading) {
+    if (estaCargando) {
         return (
             <View style={style.containerLoading}>
                 <ActivityIndicator size={60} color="#3B82F6" />
@@ -63,7 +63,7 @@ export const ReporteMedicamentosScreen = ({ route }: Props) => {
                 keyExtractor={(item, index) => `${item.id_medicamento}-${index}`}
                 ListHeaderComponent={renderHeader}
                 ListEmptyComponent={
-                    !isLoading && (
+                    !estaCargando && (
                         <View style={style.emptyContainer}>
                             <Text style={style.emptyText}>No hay medicamentos disponibles</Text>
                         </View>

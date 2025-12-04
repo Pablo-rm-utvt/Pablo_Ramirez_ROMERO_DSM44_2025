@@ -13,7 +13,7 @@ const capibara = async () => {
   app.enableCors({
     origin: [
       "http://localhost:8081",
-      "http://192.168.100.12:8081"
+      "http://192.168.151.243:8081"
     ],
     methods: "GET, HEAD, PUT, PATCH, POST, DELETE, OPTIONS",
     credentials: true
@@ -22,7 +22,6 @@ const capibara = async () => {
   app.use(urlencoded({ limit: '100mb', extended: true }));
   app.setGlobalPrefix("api");
   await app.listen(3000);
-  console.log(`http://${getLocalIp()}:3000`);
 }
 
 capibara();

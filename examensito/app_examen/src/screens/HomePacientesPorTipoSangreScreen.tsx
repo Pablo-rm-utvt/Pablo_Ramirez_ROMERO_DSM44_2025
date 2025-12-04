@@ -4,14 +4,14 @@ import { usePacientesPorTipoSangre } from "../hooks/usePacientesData";
 import { PacientesActivos } from "../interfaces/pacientesInterface";
 
 export const HomePacientesPorTipoSangreScreen = () => {
-    const { pacientes, isLoading, loadPacientes } = usePacientesPorTipoSangre();
+    const { pacientes, estaCargando, cargarPacientes } = usePacientesPorTipoSangre();
     const [tipoSangre, setTipoSangre] = useState<string>("");
     const [searched, setSearched] = useState<boolean>(false);
 
     const handleSearch = () => {
         if (tipoSangre.trim()) {
             setSearched(true);
-            loadPacientes(tipoSangre);
+            cargarPacientes(tipoSangre);
         }
     };
 
@@ -35,7 +35,7 @@ export const HomePacientesPorTipoSangreScreen = () => {
                 </View>
             </View>
 
-            {isLoading ? (
+            {estaCargando ? (
                 <View style={style.containerLoading}>
                     <ActivityIndicator size={60} color="#3B82F6" />
                 </View>

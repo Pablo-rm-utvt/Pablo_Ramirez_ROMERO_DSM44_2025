@@ -1,10 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-/**
- * Paleta de colores moderna y vibrante
- */
 export const COLORS = {
-    // Neutros
     white: '#FFFFFF',
     black: '#000000',
     gray50: '#FAFAFA',
@@ -18,23 +14,19 @@ export const COLORS = {
     gray800: '#424242',
     gray900: '#212121',
 
-    // Primario (Azul Vibrante)
     primary: '#0066FF',
     primaryLight: '#E6F2FF',
     primaryDark: '#0052CC',
     primarySoft: '#F0F7FF',
 
-    // Secundario (Rosa/Magenta)
     secondary: '#FF3B7F',
     secondaryLight: '#FFE6F0',
     secondaryDark: '#E60052',
 
-    // Terciario (Verde)
     tertiary: '#00D084',
     tertiaryLight: '#E6FFF5',
     tertiaryDark: '#00A366',
 
-    // Estados
     success: '#00D084',
     warning: '#FF9500',
     error: '#FF3B3B',
@@ -43,17 +35,12 @@ export const COLORS = {
     // Tipo de sangre
     bloodRed: '#FF2E5C',
 
-    // Gradientes (como strings para referencia)
     gradientBlue: ['#0066FF', '#0052CC'],
     gradientPink: ['#FF3B7F', '#E60052'],
     gradientGreen: ['#00D084', '#00A366'],
 };
 
-/**
- * Estilos globales reutilizables
- */
 export const globalStyles = StyleSheet.create({
-    // Contenedores
     container: {
         flex: 1,
         backgroundColor: COLORS.white,
@@ -87,7 +74,6 @@ export const globalStyles = StyleSheet.create({
         color: COLORS.white,
     },
 
-    // Cards
     card: {
         backgroundColor: COLORS.white,
         borderRadius: 8,
@@ -108,7 +94,6 @@ export const globalStyles = StyleSheet.create({
         borderColor: COLORS.gray100,
     },
 
-    // Botones
     button: {
         paddingHorizontal: 16,
         paddingVertical: 12,
@@ -168,7 +153,6 @@ export const globalStyles = StyleSheet.create({
         color: COLORS.primary,
     },
 
-    // Texto
     title: {
         fontSize: 20,
         fontWeight: '700',
@@ -220,7 +204,6 @@ export const globalStyles = StyleSheet.create({
         borderColor: COLORS.primary,
     },
 
-    // Espaciado
     row: {
         flexDirection: 'row',
         alignItems: 'center',

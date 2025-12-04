@@ -6,14 +6,14 @@ const TOTAL_RECORDS = 500;
 
 // === ENUM ===
 const TipoSAngre = {
-    A_POSITIVO : "A+",
-    A_NEGATIVO : "A-",
-    B_POSITIVO : "B+",
-    B_NEGATIVO : "B-",
-    AB_POSITIVO : "AB+",
-    AB_NEGATIVO : "AB-",
-    O_POSITIVO : "O+",
-    O_NEGATIVO : "O-"
+  A_POSITIVO: "A+",
+  A_NEGATIVO: "A-",
+  B_POSITIVO: "B+",
+  B_NEGATIVO: "B-",
+  AB_POSITIVO: "AB+",
+  AB_NEGATIVO: "AB-",
+  O_POSITIVO: "O+",
+  O_NEGATIVO: "O-"
 };
 
 // === FUNCIONES AUXILIARES ===
@@ -26,8 +26,6 @@ function randomDateWithin(start, end) {
 
 // === FUNCIÓN PRINCIPAL ===
 async function sendSensorData() {
-  console.log(`Iniciando envío de ${TOTAL_RECORDS} registros...`);
-
   const today = new Date();
   today.setHours(23, 59, 59, 999);
   const recordsPerDay = Math.floor(TOTAL_RECORDS / 7);
@@ -58,10 +56,7 @@ async function sendSensorData() {
 
     await sendBatch(batch);
     count += batch.length;
-    console.log(`Día ${i + 1}: Enviados ${batch.length} registros (total: ${count})`);
   }
-
-  console.log("Envío completo registros");
 }
 
 // === FUNCIÓN PARA ENVIAR LOTES ===

@@ -73,8 +73,6 @@ export interface Yesterday {
 
 type DataSensor = any;
 
-// Converts JSON strings to/from your types
-// and asserts the results of JSON.parse at runtime
 export class Convert {
     public static toDataSensor(json: string): DataSensor {
         return cast(JSON.parse(json), r("DataSensor"));

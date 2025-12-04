@@ -12,7 +12,7 @@ import { RootStackParams } from '../../navigator/ExampleNavigator';
 type HomeExampleNavigationProp = StackNavigationProp<RootStackParams, 'HomeExample'>;
 
 export const HomeExample = () => {
-    const { isLoading, loadExample, listExample } = useExampleApi();
+    const { estaCargando, loadExample, listExample } = useExampleApi();
 
     const focused = useIsFocused();
     const navigation = useNavigation<HomeExampleNavigationProp>();
@@ -31,7 +31,7 @@ export const HomeExample = () => {
     }
 
     useEffect(() => {
-        (!isLoading) && loadExample();
+        (!estaCargando) && loadExample();
     }, [focused])
 
     return (

@@ -12,20 +12,17 @@ export class ClinicaService {
     private readonly clinicaMedicaRepository: Repository<Clinica>,
   ) { }
 
-  //CREAR NUEVA HISTORIA CLÍNICA
   async create(createClinicaMedicaDto: CreateClinicaDto): Promise<Clinica> {
     const nuevaHistoria = this.clinicaMedicaRepository.create(createClinicaMedicaDto);
     return await this.clinicaMedicaRepository.save(nuevaHistoria);
   }
 
-  //OBTENER TODAS LAS HISTORIAS CLÍNICAS
   async findAll(): Promise<Clinica[]> {
     return await this.clinicaMedicaRepository.find({
       order: { fecha_ingreso: 'DESC' }
     });
   }
 
-  //OBTENER UNA HISTORIA CLÍNICA POR ID
   async findOne(id: number): Promise<Clinica> {
     const historia = await this.clinicaMedicaRepository.findOne({
       where: { id }
@@ -38,7 +35,6 @@ export class ClinicaService {
     return historia;
   }
 
-  //BUSCAR POR NOMBRE DE PACIENTE
   async findByPatientName(nombre: string): Promise<Clinica[]> {
     return await this.clinicaMedicaRepository.find({
       where: {
@@ -48,17 +44,14 @@ export class ClinicaService {
     });
   }
 
-  //ACTUALIZAR HISTORIA CLÍNICA
   async update(id: number, updateClinicaMedicaDto: UpdateClinicaDto): Promise<Clinica> {
     const historia = await this.findOne(id);
 
-    // Actualizar campos
     Object.assign(historia, updateClinicaMedicaDto);
 
     return await this.clinicaMedicaRepository.save(historia);
   }
 
-  //ELIMINAR HISTORIA CLÍNICA
   async remove(id: number): Promise<{ message: string }> {
     const historia = await this.findOne(id);
     await this.clinicaMedicaRepository.remove(historia);
@@ -66,7 +59,6 @@ export class ClinicaService {
     return { message: `Historia clínica del paciente eliminada correctamente` };
   }
 
-  //OBTENER ESTADÍSTICAS BÁSICAS
   async getStats(): Promise<any> {
     const total = await this.clinicaMedicaRepository.count();
     const porSexo = await this.clinicaMedicaRepository

@@ -5,16 +5,16 @@ import { PokemonCard } from '../components/PokemonCard';
 
 export const HomePokemon = () => {
 
-    const { loadPokemons, simplePokemonList } = usePokemonPaginated();
+    const { cargarPokemons, listaSimplePokemon } = usePokemonPaginated();
 
     return (
         <View
             style={style.root}
         >
             <FlatList
-                data={simplePokemonList}
+                data={listaSimplePokemon}
                 keyExtractor={(pokemon, index) => `${pokemon.id}${index}`}
-                // Header
+
                 ListHeaderComponent={(
                     <View>
                         <Image
@@ -34,7 +34,6 @@ export const HomePokemon = () => {
                         </Text>
                     </View>
                 )}
-                // Body
                 showsVerticalScrollIndicator={false}
                 numColumns={2} // Ojo si lo cambio debo reiniciar el app
                 renderItem={({ item }) => (
@@ -42,11 +41,8 @@ export const HomePokemon = () => {
                         {...item}
                     />
                 )}
-
-                // Infinite Scroll
-                onEndReached={loadPokemons}
+                onEndReached={cargarPokemons}
                 onEndReachedThreshold={0.2}
-                // Footer
                 ListFooterComponent={(
                     <ActivityIndicator
                         style={{ height: 120 }}

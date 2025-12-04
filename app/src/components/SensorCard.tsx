@@ -15,7 +15,7 @@ interface Props {
 
 export const SensorCard = ({ id, estado, temperatura_c, distacia_cm, fecha }: Props) => {
 
-    const { isLoading, color } = useTypeColorStatus(id);
+    const { estaCargando, color } = useTypeColorStatus(id);
 
 
     return (
@@ -23,9 +23,9 @@ export const SensorCard = ({ id, estado, temperatura_c, distacia_cm, fecha }: Pr
 
 
         <View
-            style={{ ...style.cardContainer, borderColor: (isLoading) ? color[1] : color }}
+            style={{ ...style.cardContainer, borderColor: (estaCargando) ? color[1] : color }}
         >
-            <Text style={{ ...style.name, color: (isLoading) ? color[1] : color }}>{estado}</Text>
+            <Text style={{ ...style.name, color: (estaCargando) ? color[1] : color }}>{estado}</Text>
             <Text style={style.id}>ID: </Text>
             <Text style={style.ide}> {id}</Text>
             <Text style={style.temperature}>Temperatura {temperatura_c}°C</Text>

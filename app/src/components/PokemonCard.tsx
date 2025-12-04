@@ -22,7 +22,7 @@ export const PokemonCard = ({ id, name, picture, url }: Props) => {
 
     const navigation = useNavigation<NavigationProp>();
 
-    const { isLoading, color } = useTypeColorPokemon(id);
+    const { estaCargando, color } = useTypeColorPokemon(id);
 
     return (
         <TouchableOpacity
@@ -39,7 +39,7 @@ export const PokemonCard = ({ id, name, picture, url }: Props) => {
                 <View
                     style={{
                         ...style.backgroundTop,
-                        backgroundColor: isLoading
+                        backgroundColor: estaCargando
                             ? "gray"
                             : color.length > 1
                                 ? color[1]
@@ -49,12 +49,12 @@ export const PokemonCard = ({ id, name, picture, url }: Props) => {
                 <View
                     style={{
                         ...style.backgroundButtom,
-                        backgroundColor: isLoading ? "gray" : color[0],
+                        backgroundColor: estaCargando ? "gray" : color[0],
                     }}
                 />
                 <Image
                     style={style.pokeball}
-                    source={require("../../assets/pokeball-light.png")} //
+                    source={require("../../assets/pokeball-light.png")}
                 />
                 <Image style={style.pokemon} source={{ uri: picture }} />
                 <Text style={style.name}>

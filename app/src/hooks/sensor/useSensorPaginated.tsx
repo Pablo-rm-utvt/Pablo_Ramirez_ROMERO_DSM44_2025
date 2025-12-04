@@ -3,21 +3,21 @@ import { sensorApi } from "../../api/sensorApi";
 import { NewSensorList, Welcome, Datum } from "../../interfaces/sensorInterface";
 
 interface UseSensorPaginated {
-    isLoading: boolean;
+    estaCargando: boolean;
     loadSensor: () => void;
     simpleSensorList: NewSensorList[];
 }
 
 export const useSensorPaginated = (): UseSensorPaginated => {
 
-    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [estaCargando, setEstaCargando] = useState<boolean>(false);
     const [simpleSensorList, setSimpleSensorList] = useState<NewSensorList[]>([]);
-    const nextPageUrl = useRef<string | null>("http://192.168.100.12:3000/api/sensor/paginate/");
+    const urlSiguiente = useRef<string | null>("http://192.168.151.243:3000/api/sensor/paginate/");
 
     const loadSensor = async () => {
-        setIsLoading(true);
-        const response = await sensorApi.get<Welcome>(nextPageUrl.current || "");
-        nextPageUrl.current = response.data.links.next || null;
+        setEstaCargando(true);
+        const response = await sensorApi.get<Welcome>(urlSiguiente.current || "");
+        urlSiguiente.current = response.data.links.next || null;
         mapSensorList(response.data.data || []);
     }
 
@@ -43,6 +43,6 @@ export const useSensorPaginated = (): UseSensorPaginated => {
         loadSensor();
     }, []);
 
-    return { isLoading, loadSensor, simpleSensorList };
+    return { estaCargando, loadSensor, simpleSensorList };
 
 }

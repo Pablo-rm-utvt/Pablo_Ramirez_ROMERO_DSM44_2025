@@ -6,12 +6,12 @@ import { PacientesCard } from "../components/PacientesCard";
 import { COLORS, globalStyles } from "../theme/globalStyles";
 
 export const PacientesScreens = () => {
-    const { pacientes, isLoading, loadPacientes } = usePacientesActivos();
+    const { pacientes, isLoading, cargarPacientes } = usePacientesActivos();
     const navigation = useNavigation<any>();
 
     useEffect(() => {
-        loadPacientes();
-    }, [loadPacientes]);
+        cargarPacientes();
+    }, [cargarPacientes]);
 
     return (
         <View style={styles.root}>
@@ -20,7 +20,6 @@ export const PacientesScreens = () => {
                 keyExtractor={(paciente, index) => `${paciente.id_paciente}${index}`}
                 ListHeaderComponent={(
                     <View>
-                        {/* Header Principal */}
                         <View style={styles.headerContainer}>
                             <View style={styles.headerGradient}>
                                 <Text style={styles.headerTitle}>Pacientes</Text>
@@ -28,7 +27,6 @@ export const PacientesScreens = () => {
                             </View>
                         </View>
 
-                        {/* Info y Botón */}
                         <View style={styles.actionBar}>
                             <View style={styles.statCard}>
                                 <Text style={styles.statNumber}>{pacientes.length}</Text>
@@ -43,7 +41,6 @@ export const PacientesScreens = () => {
                             </TouchableOpacity>
                         </View>
 
-                        {/* Espaciado */}
                         <View style={styles.sectionSpacer} />
                     </View>
                 )}
@@ -54,7 +51,7 @@ export const PacientesScreens = () => {
                 renderItem={({ item }) => (
                     <PacientesCard paciente={item} />
                 )}
-                onEndReached={loadPacientes}
+                onEndReached={cargarPacientes}
                 onEndReachedThreshold={0.3}
                 ListEmptyComponent={(
                     <View style={[globalStyles.centerLoading, { marginTop: 100 }]}>

@@ -1,53 +1,43 @@
 import React from 'react';
-import { View, Text, FlatList, ActivityIndicator, StyleSheet } from 'react-native';
+import { View, Text, FlatList, StyleSheet } from 'react-native';
+import { StackScreenProps } from '@react-navigation/stack';
 import { useClinicaApi } from '../../hooks/clinica/useClinicaApi';
 import { PacienteCard } from '../../components/PacienteCard';
 import { Fab } from '../../components/Fab';
-import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParamList } from '../../interfaces/clinicaInterfaces';
 
 type Props = StackScreenProps<RootStackParamList, 'HomeClinica'>;
 
 export const HomeClinica = ({ navigation }: Props) => {
-    const { isLoading, pacientes, loadPacientes } = useClinicaApi();
+    const { pacientes, cargarPacientes } = useClinicaApi();
 
-    // Efecto para recargar los datos cuando la pantalla obtiene el foco
     React.useEffect(() => {
         const unsubscribe = navigation.addListener('focus', () => {
-            loadPacientes();
+            cargarPacientes();
         });
-
         return unsubscribe;
-    }, [navigation, loadPacientes]);
-
-
+    }, [navigation, cargarPacientes]);
 
     return (
         <View style={styles.container}>
             <FlatList
                 data={pacientes}
-                keyExtractor={(paciente) => paciente.id.toString()}
+                keyExtractor={item => item.id.toString()}
                 showsVerticalScrollIndicator={false}
-
                 renderItem={({ item }) => (
                     <PacienteCard
                         paciente={item}
-                        onPress={() => {
-                            navigation.navigate('PacienteDetail', {
-                                paciente: item
-                            });
-                        }}
+                        onPress={() =>
+                            navigation.navigate('PacienteDetail', { paciente: item })
+                        }
                     />
                 )}
                 ListEmptyComponent={() => (
-                    <View style={styles.emptyContainer}>
-                        <Text style={styles.emptyText}>
-                            No hay pacientes registrados
-                        </Text>
+                    <View style={styles.empty}>
+                        <Text style={styles.emptyText}>No hay pacientes registrados</Text>
                     </View>
                 )}
             />
-
             <Fab
                 titulo="+"
                 position="button_right"
@@ -62,17 +52,7 @@ const styles = StyleSheet.create({
         flex: 1,
         marginTop: 10
     },
-    loadingContainer: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    fab: {
-        position: 'absolute',
-        bottom: 25,
-        right: 25
-    },
-    emptyContainer: {
+    empty: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',

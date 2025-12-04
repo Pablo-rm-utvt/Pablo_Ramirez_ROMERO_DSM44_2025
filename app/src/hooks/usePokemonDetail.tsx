@@ -3,25 +3,25 @@ import { PokemonSimple } from "../interfaces/pokemonInterfaces";
 import { pokeApi } from "../api/pokeApi";
 
 interface UsePokemonDetail {
-    isLoadingPokemon: boolean;
+    estaCargandoPokemon: boolean;
     pokemon: PokemonSimple;
 }
 
 export const usePokemonDetail = (url: string): UsePokemonDetail => {
 
-    const [isLoadingPokemon, setIsLoadingPokemon] = useState<boolean>(false);
+    const [estaCargandoPokemon, setEstaCargandoPokemon] = useState<boolean>(false);
     const [pokemon, setPokemon] = useState<PokemonSimple>({} as PokemonSimple);
 
-    const loadPokemon = async () => {
-        setIsLoadingPokemon(true);
-        const response = await pokeApi.get<PokemonSimple>(url);
-        setPokemon(response.data);
-        setIsLoadingPokemon(false);
+    const cargarPokemon = async () => {
+        setEstaCargandoPokemon(true);
+        const respuesta = await pokeApi.get<PokemonSimple>(url);
+        setPokemon(respuesta.data);
+        setEstaCargandoPokemon(false);
     }
 
     useEffect(() => {
-        loadPokemon();
+        cargarPokemon();
     }, []);
 
-    return { isLoadingPokemon, pokemon };
+    return { estaCargandoPokemon, pokemon };
 }

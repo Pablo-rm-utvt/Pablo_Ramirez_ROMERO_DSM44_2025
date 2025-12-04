@@ -4,7 +4,7 @@ import { UseExample } from "../../interfaces/exampleInterfaces";
 import { FormDataExample } from "./useExampleForm";
 
 interface UseExampleApi {
-    isLoading: boolean;
+    estaCargando: boolean;
     listExample: UseExample[];
     loadExample: () => void;
     createExample: (data: FormDataExample) => void;
@@ -13,16 +13,16 @@ interface UseExampleApi {
 }
 
 export const useExampleApi = (): UseExampleApi => {
-    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [estaCargando, setEstaCargando] = useState<boolean>(false);
     const [listExample, setListExample] = useState<UseExample[]>([]);
 
-    const apiUrl: string = "http://192.168.100.12:3000/api/tarea";
+    const apiUrl: string = "http://192.168.151.243:3000/api/tarea";
 
     const loadExample = async () => {
-        setIsLoading(true);
+        setEstaCargando(true);
         const response = await myApi.get<UseExample[]>(apiUrl);
         setListExample(response.data);
-        setIsLoading(false);
+        setEstaCargando(false);
     }
 
     useEffect(() => {
@@ -63,5 +63,5 @@ export const useExampleApi = (): UseExampleApi => {
         await myApi.delete(apiUrl + `/${data.id_example}`);
     }
 
-    return { isLoading, listExample, loadExample, createExample, updateExample, deleteExample };
+    return { estaCargando, listExample, loadExample, createExample, updateExample, deleteExample };
 }

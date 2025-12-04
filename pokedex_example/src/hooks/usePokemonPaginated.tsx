@@ -3,43 +3,42 @@ import { pokeApi } from "../api/pokeApi";
 import { NewPokemonList, PokemonList, Result } from "../interfaces/pokemonInterfaces";
 
 interface UsePokemonPaginated {
-    isLoading: boolean;
-    loadPokemons: () => void;
-    simplePokemonList: NewPokemonList[];
+    estaCargando: boolean;
+    cargarPokemons: () => void;
+    listaSimplePokemon: NewPokemonList[];
 }
 
 export const usePokemonPaginated = (): UsePokemonPaginated => {
 
-    const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [simplePokemonList, setSimplePokemonList] = useState<NewPokemonList[]>([]);
-    const nextPageUrl = useRef("https://pokeapi.co/api/v2/pokemon");
+    const [estaCargando, setEstaCargando] = useState<boolean>(false);
+    const [listaSimplePokemon, setListaSimplePokemon] = useState<NewPokemonList[]>([]);
+    const urlSiguiente = useRef("https://pokeapi.co/api/v2/pokemon");
 
-    const loadPokemons = async () => {
-        setIsLoading(true);
-        const respose = await pokeApi.get<PokemonList>(nextPageUrl.current);
-        nextPageUrl.current = respose.data.next;
-        mapPokemonList(respose.data.results)
+    const cargarPokemons = async () => {
+        setEstaCargando(true);
+        const respose = await pokeApi.get<PokemonList>(urlSiguiente.current);
+        urlSiguiente.current = respose.data.next;
+        mapearListaPokemon(respose.data.results)
 
     }
 
-    const mapPokemonList = (PokemonList: Result[]) => {
+    const mapearListaPokemon = (PokemonList: Result[]) => {
         const newPokemonList: NewPokemonList[] = PokemonList.map(({ name, url }) => {
-            //https://pokeapi.co/api/v2/pokemon/1/
             const urlParts = url.split("/");
             const id = urlParts[urlParts.length - 2];
             const picture = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/${id}.gif`;
             return { name, id, picture, url };
         });
 
-        setSimplePokemonList((prevList) => [...prevList, ...newPokemonList]);
+        setListaSimplePokemon((prevList) => [...prevList, ...newPokemonList]);
 
-        setIsLoading(false);
+        setEstaCargando(false);
     }
 
     useEffect(() => {
-        loadPokemons();
+        cargarPokemons();
     }, []);
 
-    return { isLoading, loadPokemons, simplePokemonList };
+    return { estaCargando, cargarPokemons, listaSimplePokemon };
 
 }

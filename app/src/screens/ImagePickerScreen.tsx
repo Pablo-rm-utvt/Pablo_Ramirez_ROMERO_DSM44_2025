@@ -24,7 +24,7 @@ export const ImagePickerScreen = () => {
         })();
     }, []);
 
-    const pickImage = async () => {
+    const seleccionarImagen = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ["images"],
             allowsEditing: true,
@@ -52,7 +52,7 @@ export const ImagePickerScreen = () => {
             <BtnTouch
                 titulo='Importar imagen'
                 color='violet'
-                action={() => pickImage()}
+                action={() => seleccionarImagen()}
             />
             {
                 (imagen64) && (

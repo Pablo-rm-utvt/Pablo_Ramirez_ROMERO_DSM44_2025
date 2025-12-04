@@ -1,7 +1,7 @@
 const axios = require("axios");
 
 const API_BASE = "http://localhost:3000/api";
-const TOTAL_EMPLEADOS = 1000;
+const TOTAL_EMPLEADOS = 100;
 const YEAR = 2025;
 const EMPLEADOS = [];
 

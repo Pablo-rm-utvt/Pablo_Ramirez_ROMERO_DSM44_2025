@@ -1,7 +1,6 @@
 import { IsString, IsInt, IsOptional, IsNotEmpty, Min, Max, IsEmail, IsDateString } from 'class-validator';
 
 export class CreateClinicaDto {
-    // DATOS PERSONALES DEL PACIENTE
     @IsNotEmpty()
     @IsString()
     nombre_paciente: string;
@@ -40,7 +39,6 @@ export class CreateClinicaDto {
     @IsEmail()
     correo_electronico?: string;
 
-    // INFORMACIÓN MÉDICA GENERAL
     @IsOptional()
     @IsDateString()
     fecha_ingreso?: string;
@@ -81,7 +79,6 @@ export class CreateClinicaDto {
     @IsString()
     area_internamiento?: string;
 
-    // SIGNOS VITALES
     @IsOptional()
     @IsString()
     presion_arterial?: string;
@@ -97,7 +94,6 @@ export class CreateClinicaDto {
     @IsInt()
     saturacion_oxigeno?: number;
 
-    // NOTAS DE SEGUIMIENTO
     @IsOptional()
     @IsString()
     notas_evolucion?: string;
@@ -110,7 +106,6 @@ export class CreateClinicaDto {
     @IsDateString()
     fecha_alta?: string;
 
-    // IMÁGENES (Base64) - Todas opcionales
     @IsOptional()
     @IsString()
     foto_paciente?: string;

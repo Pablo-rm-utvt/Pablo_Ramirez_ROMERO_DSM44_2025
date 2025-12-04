@@ -72,12 +72,10 @@ export interface PacientesPorTipoSangre {
     tipo_sangre: string;
 }
 
-// ==================== HOOK RETURN TYPES ====================
-
 export interface UsePacientesActivosReturn {
     pacientes: PacientesActivos[];
     isLoading: boolean;
-    loadPacientes: (refresh?: boolean) => Promise<void>;
+    cargarPacientes: (refresh?: boolean) => Promise<void>;
 }
 
 export interface UsePacienteCompletoReturn {
@@ -113,7 +111,7 @@ export interface UseCitasCanceladasReturn {
 export interface UsePacientesPorTipoSangreReturn {
     pacientes: PacientesActivos[];
     isLoading: boolean;
-    loadPacientes: (tipoSangre: string) => void;
+    cargarPacientes: (tipoSangre: string) => void;
 }
 
 export interface UseCitasPorFechaReturn {
@@ -121,3 +119,40 @@ export interface UseCitasPorFechaReturn {
     isLoading: boolean;
     loadCitas: (fecha: string) => void;
 }
+
+// Form Data Interfaces
+export interface FormPacienteData extends CreatePacienteDto {
+    id_paciente?: number;
+}
+
+export interface FormCitaData {
+    id_cita?: number;
+    id_paciente: number;
+    fecha: string;
+    hora: string;
+    motivo: string;
+    medico_asignado: string;
+    estatus: string;
+}
+
+export interface FormTratamientoData {
+    id_tratamiento?: number;
+    id_paciente: number;
+    diagnostico: string;
+    medicamento: string;
+    dosis: string;
+    fecha_inicio: string;
+    fecha_fin: string;
+    notas: string;
+}
+
+export interface FormMedicamentoData {
+    id_medicamento?: number;
+    id_paciente: number;
+    medicamento: string;
+    dosis: string;
+    frecuencia: string;
+    fecha_inicio: string;
+    fecha_fin: string;
+}
+

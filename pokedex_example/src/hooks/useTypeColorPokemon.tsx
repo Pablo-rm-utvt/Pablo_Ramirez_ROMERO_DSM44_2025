@@ -8,13 +8,13 @@ export interface TypePokemon {
 }
 
 interface UseTypeColorPokemon {
-    isLoading: boolean;
+    estaCargando: boolean;
     color: string[];
 }
 
 export const useTypeColorPokemon = (id: string | number): UseTypeColorPokemon => {
 
-    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [estaCargando, setEstaCargando] = useState<boolean>(false);
     const [color, setColor] = useState<string[]>([]);
 
     const tipo: TypePokemon[] = [
@@ -50,13 +50,13 @@ export const useTypeColorPokemon = (id: string | number): UseTypeColorPokemon =>
     const loadType = async () => {
         const respose = await pokeApi.get<PokemonSimple>(`https://pokeapi.co/api/v2/pokemon/${id}`)
         getColorType(respose.data.types);
-        setIsLoading(false);
+        setEstaCargando(false);
     }
 
     useEffect(() => {
         loadType();
     }, []);
 
-    return { isLoading, color };
+    return { estaCargando, color };
 
 }

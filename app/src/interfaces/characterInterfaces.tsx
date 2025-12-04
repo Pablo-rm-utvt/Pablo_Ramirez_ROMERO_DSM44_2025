@@ -1,4 +1,3 @@
-// models.ts
 
 export interface Info {
   count: number;
@@ -16,7 +15,7 @@ export interface Character {
   id: number;
   name: string;
   status: Status;
-  species: string; 
+  species: string;
   type: string;
   gender: Gender;
   origin: Location;
@@ -24,13 +23,13 @@ export interface Character {
   image: string;
   episode: string[];
   url: string;
-  created: string; // la API devuelve un string tipo fecha
+  created: string;
 }
 
 export interface CharactersResponse {
   info: Info;
   next: string;
-   results: Character[];
+  results: Character[];
 }
 
 export enum Gender {

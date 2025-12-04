@@ -16,7 +16,6 @@ export const PacientesCard = ({ paciente }: Props) => {
     type PacientesCardNavigationProp = StackNavigationProp<RootStackParams, 'PacienteHome'>;
     const navigation = useNavigation<PacientesCardNavigationProp>();
 
-    // Color aleatorio para cada card basado en tipo de sangre
     const getColorBySangre = (sangre: string) => {
         const sangres: { [key: string]: string } = {
             'O+': COLORS.primary,
@@ -39,10 +38,7 @@ export const PacientesCard = ({ paciente }: Props) => {
             activeOpacity={0.7}
         >
             <View style={[styles.cardContainer, { width: widthDimension * 0.45 }]}>
-                {/* Barra superior coloreada */}
                 <View style={[styles.colorBar, { backgroundColor: accentColor }]} />
-
-                {/* Contenido */}
                 <View style={styles.contentWrapper}>
                     <View style={styles.headerInfo}>
                         <View style={[styles.iniciales, { backgroundColor: accentColor }]}>
@@ -62,8 +58,6 @@ export const PacientesCard = ({ paciente }: Props) => {
 
                     {/* Separador */}
                     <View style={styles.separator} />
-
-                    {/* Footer */}
                     <View style={styles.footer}>
                         <View style={[styles.badge, { backgroundColor: accentColor + '15' }]}>
                             <Text style={[styles.tipoSangre, { color: accentColor }]}>

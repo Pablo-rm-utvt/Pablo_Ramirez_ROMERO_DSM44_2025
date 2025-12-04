@@ -10,8 +10,10 @@ import { SensorScreen } from "../screens/sensor/SensorScreen";
 import { SensorData } from "../screens/sensor/SensorData";
 import { QrScannerScreen } from "../screens/QrScannerScreen";
 import { LocationScreen } from "../screens/LocationScreen";
+import { ipEmpleado } from "../screens/empleados/ipEmpleado";
 
 export type RootDrawerNavigator = {
+  ipEmpleado: undefined;
   SensorScreen: undefined;
   SensorData: undefined;
   PokemonNavigator: undefined;
@@ -52,6 +54,8 @@ const Navigator = () => {
       />
 
       <Drawer.Screen name="LocationScreen" component={LocationScreen} />
+
+      <Drawer.Screen name="ipEmpleado" component={ipEmpleado} />
       <Drawer.Screen name="SensorData" component={SensorData} />
       <Drawer.Screen name="PokemonNavigator" component={PokemonNavigator} />
       <Drawer.Screen name="ImagePickerScreen" component={ImagePickerScreen} />
@@ -74,6 +78,5 @@ const Navigator = () => {
 };
 
 export const DrawerNavigator = () => {
-  // Elimina la validación de login, entra directo al Drawer principal
   return <Navigator />;
 };

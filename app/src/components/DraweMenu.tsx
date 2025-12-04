@@ -8,7 +8,7 @@ export const DrawerMenu = ({ navigation }: DrawerContentComponentProps) => {
         <DrawerContentScrollView
             style={{
                 flex: 1,
-                backgroundColor: 'rgba(216, 255, 165, 0.95)', // Fondo semi-transparente
+                backgroundColor: 'rgba(216, 255, 165, 0.95)',
                 borderTopRightRadius: 25,
                 borderBottomRightRadius: 25,
                 opacity: 0.98,
@@ -75,6 +75,16 @@ export const DrawerMenu = ({ navigation }: DrawerContentComponentProps) => {
                     >
 
                         <Text style={styles.menuButtonTextR}>Rick API</Text>
+
+                    </TouchableOpacity>
+
+
+                    <TouchableOpacity
+                        style={styles.menuButton}
+                        onPress={() => navigation.navigate('ipEmpleado')}
+                    >
+
+                        <Text style={styles.menuButtonTextR}> Ip</Text>
 
                     </TouchableOpacity>
 

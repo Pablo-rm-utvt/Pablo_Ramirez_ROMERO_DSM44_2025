@@ -39,7 +39,6 @@ export const PokemonDetail = ({ pokemon }: Props) => {
     return (
         <ScrollView style={styles.container}>
 
-            {/* Type(s) */}
             <Text style={styles.title}>Type(s)</Text>
             <View style={styles.typeContainer}>
                 {
@@ -57,13 +56,11 @@ export const PokemonDetail = ({ pokemon }: Props) => {
                 }
             </View>
 
-            {/* Weight */}
             <Text style={styles.title}>Weight</Text>
             <Text style={styles.value}>
                 {pokemon.weight ? pokemon.weight + " lb" : "N/A"}
             </Text>
 
-            {/* Sprites */}
             <Text style={styles.title}>Sprites</Text>
             <ScrollView
                 horizontal
@@ -96,13 +93,12 @@ export const PokemonDetail = ({ pokemon }: Props) => {
                 }
             </ScrollView>
 
-            {/* Moves (ataques) */}
             <Text style={styles.title}>Moves</Text>
             <View style={
                 styles.movesContainer
             }>
                 {
-                    pokemon.moves?.slice(0, 20).map(({ move }) => ( // mostramos solo 20 para no saturar
+                    pokemon.moves?.slice(0, 20).map(({ move }) => (
                         <Text key={move.name} style={{
                             ...styles.moveText,
                             color: findColorType(pokemon.types[0].type.name),

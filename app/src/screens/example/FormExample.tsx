@@ -14,7 +14,7 @@ export const FormExample = ({ navigation, route }: Props) => {
 
     const { form, handleInputChange } = useFormE();
     const { createExample, updateExample, deleteExample } = useExampleApi();
-    const { pickImage } = useImagePicker();
+    const { seleccionarImagen } = useImagePicker();
 
     useEffect(() => {
         const example = route.params;
@@ -90,7 +90,7 @@ export const FormExample = ({ navigation, route }: Props) => {
                                 titulo={form[`image${num}_example` as keyof FormDataExample] ? `Cambiar imagen ${num}` : `Seleccionar imagen ${num}`}
                                 color='olive'
                                 action={async () => {
-                                    const base64 = await pickImage();
+                                    const base64 = await seleccionarImagen();
                                     if (base64) {
                                         handleInputChange(`image${num}_example` as keyof FormDataExample, base64);
                                     }

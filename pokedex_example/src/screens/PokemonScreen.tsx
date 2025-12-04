@@ -12,9 +12,9 @@ export const PokemonScreen = ({ navigation, route }: Props) => {
 
     const { id, name, picture, url } = route.params;
 
-    const { color, isLoading } = useTypeColorPokemon(id);
+    const { color, estaCargando } = useTypeColorPokemon(id);
 
-    const { pokemon, isLoadingPokemon } = usePokemonDetail(url);
+    const { pokemon, estaCargandoPokemon } = usePokemonDetail(url);
 
     return (
         <View
@@ -24,17 +24,16 @@ export const PokemonScreen = ({ navigation, route }: Props) => {
                 <View
                     style={{
                         ...style.leftContainer,
-                        backgroundColor: (isLoading) ? 'gray' : (color.length > 1) ? color[1] : color[0]
+                        backgroundColor: (estaCargando) ? 'gray' : (color.length > 1) ? color[1] : color[0]
                     }}
                 />
                 <View
                     style={{
                         ...style.rigthContainer,
-                        backgroundColor: (isLoading) ? 'pink' : color[0]
+                        backgroundColor: (estaCargando) ? 'pink' : color[0]
                     }}
                 />
             </View>
-            {/* Header */}
             <View
                 style={style.headerContainer}
             >
@@ -64,9 +63,8 @@ export const PokemonScreen = ({ navigation, route }: Props) => {
                     style={style.pokemon}
                 />
             </View>
-            {/*Detail*/}
             {
-                (isLoadingPokemon)
+                (estaCargandoPokemon)
                     ? (
                         <View>
                             <ActivityIndicator
@@ -93,7 +91,6 @@ const style = StyleSheet.create({
         width: "50%",
         backgroundColor: "gray",
         borderBottomLeftRadius: 1000,
-        //borderTopLeftRadius: 1000,
     },
     rigthContainer: {
         position: "absolute",
@@ -101,7 +98,6 @@ const style = StyleSheet.create({
         height: 370,
         width: "50%",
         backgroundColor: "pink",
-        //borderBottomRightRadius: 1000,
         borderTopRightRadius: 1000,
     },
     headerContainer: {

@@ -18,19 +18,18 @@ export const usePacientesActivos = (): UsePacientesActivosReturn => {
 
   const [pacientes, setPacientes] = useState<PacientesActivos[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const nextPageUrl = useRef<string>("/pacientes/activos?page=1&limit=10");
+  const urlSiguiente = useRef<string>("/pacientes/activos?page=1&limit=10");
 
-  const loadPacientes = useCallback(async (refresh: boolean = true) => {
+  const cargarPacientes = useCallback(async (refresh: boolean = true) => {
     if (isLoading && !refresh) return;
     setIsLoading(true);
 
     try {
-      // Si es refresh, reinicia la paginación
       if (refresh) {
-        nextPageUrl.current = "/pacientes/activos?page=1&limit=10";
+        urlSiguiente.current = "/pacientes/activos?page=1&limit=10";
       }
 
-      const respuesta = await pacientesApi.get<any>(nextPageUrl.current);
+      const respuesta = await pacientesApi.get<any>(urlSiguiente.current);
 
       let data: PacientesActivos[] = [];
       if (Array.isArray(respuesta.data)) {
@@ -39,7 +38,6 @@ export const usePacientesActivos = (): UsePacientesActivosReturn => {
         data = respuesta.data.data;
       }
 
-      // Si es refresh, reemplaza los datos; si no, agrega más
       if (refresh) {
         setPacientes(data);
       } else {
@@ -47,7 +45,7 @@ export const usePacientesActivos = (): UsePacientesActivosReturn => {
       }
 
       if (respuesta.data?.next_page_url) {
-        nextPageUrl.current = respuesta.data.next_page_url;
+        urlSiguiente.current = respuesta.data.next_page_url;
       }
     } catch (error) {
       console.error("Error cargando pacientes:", error);
@@ -56,7 +54,7 @@ export const usePacientesActivos = (): UsePacientesActivosReturn => {
     }
   }, [isLoading]);
 
-  return { pacientes, isLoading, loadPacientes };
+  return { pacientes, isLoading, cargarPacientes };
 
 };
 
@@ -152,7 +150,6 @@ export const useCitasCanceladas = (): UseCitasCanceladasReturn => {
     try {
       const response = await pacientesApi.get('/pacientes/citas-canceladas');
 
-      // Extraer solo el número, no el objeto completo
       let count = 0;
       if (typeof response.data === 'number') {
         count = response.data;
@@ -179,7 +176,7 @@ export const usePacientesPorTipoSangre = (): UsePacientesPorTipoSangreReturn => 
   const [pacientes, setPacientes] = useState<PacientesActivos[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const loadPacientes = async (tipoSangre: string) => {
+  const cargarPacientes = async (tipoSangre: string) => {
     if (isLoading) return;
     setIsLoading(true);
 
@@ -191,7 +188,7 @@ export const usePacientesPorTipoSangre = (): UsePacientesPorTipoSangreReturn => 
     setIsLoading(false);
   };
 
-  return { pacientes, isLoading, loadPacientes };
+  return { pacientes, isLoading, cargarPacientes };
 
 };
 
