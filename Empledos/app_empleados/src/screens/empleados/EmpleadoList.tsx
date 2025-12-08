@@ -40,14 +40,14 @@ export const EmpleadoListScreen = () => {
                 onEndReachedThreshold={0.2}
                 ListFooterComponent={
                     isLoading ? (
-                        <View style={{ height: 100, justifyContent: 'center', alignItems: 'center', marginTop: 10 }}>
+                        <View style={{ height: 100, justifyContent: 'center', alignItems: 'center', marginTop: 0 }}>
+
+                            <Text>Cargando empleados...</Text>
 
                             <Image
                                 source={require('../../../assets/trabajo.gif')}
-                                style={{ alignSelf: "center", borderRadius: 50, height: 100, width: 100 }}
+                                style={{ alignSelf: "center", borderRadius: 50, height: 80, width: 80 }}
                             />
-                            <Text>Cargando empleados...</Text>
-
                         </View>
                     ) : null
                 }

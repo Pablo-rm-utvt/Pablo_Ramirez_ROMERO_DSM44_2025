@@ -15,7 +15,6 @@ export const useEmpleadoPaginated = (apiIp: string): UseEmpleadoPaginated => {
     const urlSiguiente = useRef<string>("");
     useEffect(() => {
         urlSiguiente.current = `${apiIp}/api/empleados`;
-        console.log("API IP en hook:", urlSiguiente.current);
     }, [apiIp]);
     const loadEmployees = async () => {
         setIsLoading(true);

@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Datum } from '../../interfaces/empleadosInterface';
 import { useNomina, useUnidadesProducidas } from '../../hooks/empleados/useEmpleadosReporte';
@@ -16,7 +16,8 @@ export const EmpleadoNominaScreen = ({ route, navigation }: Props) => {
     const { data: nomina, loadData: loadNomina } = useNomina(apiIp);
     const { data: unidadesProducidas, loadData: loadUnidades } = useUnidadesProducidas(apiIp);
 
-    const handleNavigateToEmpleado = () => navigation.goBack();
+    const handleNavigateToEmpleado = () => navigation.navigate("EmpleadoDetail", { empleado });
+    const handleNavigateToProduccion = () => navigation.navigate('EmpleadoProduccion', { empleado });
 
     useEffect(() => {
         loadNomina(empleado.id_empleado);
@@ -24,33 +25,52 @@ export const EmpleadoNominaScreen = ({ route, navigation }: Props) => {
     }, [empleado.id_empleado]);
 
     return (
-        <ScrollView style={style.container}>
-            <View style={{ backgroundColor: '#b3c8f4ff', padding: 10, borderRadius: 8, marginBottom: 15 }}>
-                <View style={{ backgroundColor: "white", borderRadius: 10, width: 180, alignItems: 'center', margin: "auto", marginBottom: 10 }}>
-                    <Text style={style.headerTitle}>{empleado.nombre} {empleado.apellido_p}</Text>
-                </View>
-
-                <View style={style.infoHeader}>
-
-                    <Text style={style.sectionTitle}>Información de Nómina</Text>
-                    <View style={style.infoRow}>
-                        <Text style={style.label}>Nomina:</Text>
-                        <Text style={style.value}>{nomina?.total ?? 0}</Text>
+        <View style={style.container}>
+            <ScrollView style={style.container}>
+                <View style={{ backgroundColor: '#b3c8f4ff', padding: 10, borderRadius: 8, marginBottom: 15 }}>
+                    <View style={{ backgroundColor: "white", borderRadius: 10, width: 180, alignItems: 'center', margin: "auto", marginBottom: 10 }}>
+                        <Text style={style.headerTitle}>{empleado.nombre} {empleado.apellido_p}</Text>
                     </View>
 
-                    <Text style={style.sectionTitle}>Unidades Producidas</Text>
-                    <View style={style.infoRow}>
-                        <Text style={style.label}>Total:</Text>
-                        <Text style={style.value}>{(unidadesProducidas?.total && unidadesProducidas.total[0]?.total_producido) ?? 0} unidades</Text>
+                    <View style={style.infoHeader}>
+
+                        <Text style={style.sectionTitle}>Información de Nómina</Text>
+                        <View style={style.infoRow}>
+                            <Text style={style.label}>Nomina:</Text>
+                            <Text style={style.value}>{nomina?.total ?? 0}</Text>
+                        </View>
+
+                        <Text style={style.sectionTitle}>Unidades Producidas</Text>
+                        <View style={style.infoRow}>
+                            <Text style={style.label}>Total:</Text>
+                            <Text style={style.value}>{(unidadesProducidas?.total && unidadesProducidas.total[0]?.total_producido) ?? 0} unidades</Text>
+                        </View>
                     </View>
                 </View>
-                <View style={{ alignItems: "center" }}>
-                    <TouchableOpacity style={{ backgroundColor: "#f48d84ff", borderRadius: 10, width: 100, alignItems: "center" }} onPress={handleNavigateToEmpleado}>
-                        <Text style={{ color: 'black' }}>Regresar</Text>
-                    </TouchableOpacity>
-                </View>
+            </ScrollView>
+
+            <View style={{ backgroundColor: "#b3c8f4ff", top: 0, height: 50, width: 360, flexDirection: "row", justifyContent: "space-around" }}>
+
+                <TouchableOpacity style={{ margin: 5, backgroundColor: "#b3c8f4ff", borderRadius: 10, justifyContent: "center", width: 100, alignItems: "center" }} onPress={handleNavigateToProduccion}>
+                    <Image
+                        style={{ width: 20, height: 20, marginBottom: 5 }}
+                        source={require('../../../assets/producciónn.png')}
+                    />
+                    <Text style={{ color: "black", fontWeight: "bold" }}>Producción</Text>
+                </TouchableOpacity>
+
+
+
+                <TouchableOpacity style={{ margin: 5, backgroundColor: "#b3c8f4ff", borderRadius: 10, justifyContent: "center", width: 100, alignItems: "center" }} onPress={handleNavigateToEmpleado}>
+                    <Image
+                        style={{ width: 20, height: 20, marginBottom: 5 }}
+                        source={require('../../../assets/return.png')}
+                    />
+                    <Text style={{ color: 'black', fontWeight: "bold" }}>Regresar</Text>
+                </TouchableOpacity>
+
             </View>
-        </ScrollView>
+        </View>
     );
 };
 
@@ -58,7 +78,6 @@ const style = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#ffffff',
-        padding: 15,
     },
     infoHeader: {
         backgroundColor: '#ffffff',

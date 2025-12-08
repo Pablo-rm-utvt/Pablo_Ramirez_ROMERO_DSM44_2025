@@ -15,7 +15,7 @@ import { EmpleadosModule } from './empleados/empleados.module';
             port: 5432,
             username: "postgres",
             password: "1234",
-            database: "dsm44",
+            database: "empresa",
             entities: [Empleado, RegistroAsistencia, RegistroProduccion],
             synchronize: true,
             autoLoadEntities: true,
